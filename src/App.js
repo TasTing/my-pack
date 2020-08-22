@@ -6,8 +6,8 @@ import ClippedDrawer from './topNavigation/topNavigation.js'
 function App() {
   return ( < div className = "App" >
     < header className = "App-header" >
-    < ClippedDrawer / >
-    < /header > < /div >
+    < ClippedDrawer/>
+    </header> </div >
   );
 }
 
