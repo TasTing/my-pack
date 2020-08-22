@@ -1,13 +1,15 @@
 import React from 'react';
 import './App.css';
-import ClippedDrawer from './topNavigation/topNavigation.js'
+import Header from "./header/header";
 
 
 function App() {
-  return ( < div className = "App" >
-    < header className = "App-header" >
-    < ClippedDrawer/>
-    </header> </div >
+  return (
+      <div className = "App">
+        <header className = "App-header">
+          <Header/>
+        </header>
+      </div >
   );
 }
 
