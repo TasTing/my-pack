@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-    makeStyles
-}
-    from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -38,9 +35,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const handleClick=(e)=>{
+    console.log(e)
+}
+
 export default function ClippedDrawer() {
     const classes = useStyles();
-
     return (
         <div className={classes.root}>
             <CssBaseline/>
@@ -52,12 +52,14 @@ export default function ClippedDrawer() {
             < Drawer className={classes.drawer} variant="permanent" classes={{paper: classes.drawerPaper,}}>
                 <Toolbar/>
                 <div className={classes.drawerContainer}>
-                    <List> {['Home', 'News'].map((text, index) => (< ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? < HomeIcon/> : < AccessAlarmIcon/>}
-                        </ListItemIcon>
-                        <ListItemText primary={text}/>
-                        </ListItem>))}
+                    <List> {['Home', 'News'].map((text, index) => (
+                        <ListItem button key={text} onClick={handleClick}>
+                            <ListItemIcon>
+                                {index % 2 === 0 ? < HomeIcon/> : < AccessAlarmIcon/>}
+                            </ListItemIcon>
+                            <ListItemText primary={text}/>
+                        </ListItem>
+                    ))}
                     </List>
                 </div>
             </Drawer>
