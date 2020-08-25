@@ -95,6 +95,7 @@ export default function ClippedDrawer() {
                     </div>
                 </Drawer>
                 <main className={classes.content}>
+                    <Toolbar />
                     <Switch>
                         <Route exact path='/posts'>
                             <Posts/>
