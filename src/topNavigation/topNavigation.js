@@ -47,6 +47,10 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'auto',
         background: 'rgba(255,255,255,0.3)',
     },
+    content:{
+        margin: theme.smallPadding,
+        padding: 'auto',
+    }
 }));
 
 

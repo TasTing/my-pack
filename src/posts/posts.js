@@ -74,10 +74,10 @@ function MainFeaturedPost(props) {
                     <Grid container>
                         <Grid item md={12}>
                             <div className={classes.mainFeaturedPostContent}>
-                                <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+                                <Typography component="h1" variant="h3" color="inherit" gutterBottom align={"left"}>
                                     {post.title}
                                 </Typography>
-                                <Typography variant="h5" color="inherit" paragraph>
+                                <Typography variant="h5" color="inherit" paragraph align={"left"}>
                                     {post.content}
                                 </Typography>
                                 <Link variant="subtitle1" href="#">
