@@ -16,6 +16,7 @@ import {CircularProgress} from "@material-ui/core";
 //Components
 import Main from '../demoMain/demoMain.js'
 import Posts from "../posts/posts";
+import Post from "../posts/post";
 // apollo graphql
 import {gql, useQuery} from '@apollo/client';
 // router
@@ -71,7 +72,6 @@ export default function ClippedDrawer() {
     const classes = useStyles();
     // APOLLO query function
     const {loading, error, data} = useQuery(getHeader);
-
     if (loading) return <CircularProgress />;
     if (error) return <p>Error :(</p>;
 
@@ -107,6 +107,9 @@ export default function ClippedDrawer() {
                         </Route>
                         <Route exact path='/'>
                             <Main/>
+                        </Route>
+                        <Route exact path='posts/:postId'>
+                            <Post/>
                         </Route>
                     </Switch>
                 </main>

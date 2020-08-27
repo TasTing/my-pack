@@ -5,8 +5,9 @@ import {makeStyles} from '@material-ui/core/styles';
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Link from '@material-ui/core/Link'
 import {CircularProgress} from "@material-ui/core";
+import {Link,useRouteMatch} from 'react-router-dom';
+
 
 const useStyles = makeStyles((theme) => ({
     mainFeaturedPost: {
@@ -32,9 +33,12 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(3),
         [theme.breakpoints.up('md')]: {
             padding: theme.spacing(6),
-            paddingRight: 0,
+            // paddingRight: 0,
         },
     },
+    link: {
+        float:'left',
+    }
 }));
 
 const getPosts = gql`
@@ -46,6 +50,7 @@ const getPosts = gql`
                 url
                 caption
             }
+            description
             content
         }
     }
@@ -64,6 +69,7 @@ export default function Posts() {
 function MainFeaturedPost(props) {
     const classes = useStyles();
     const {posts} = props;
+    let match = useRouteMatch();
 
     return (
         <div>
@@ -79,11 +85,13 @@ function MainFeaturedPost(props) {
                                     {post.title}
                                 </Typography>
                                 <Typography variant="h5" color="inherit" paragraph align={"left"}>
-                                    {post.content}
+                                    {post.description}
                                 </Typography>
-                                <Link variant="subtitle1" href="#">
-                                    {post.id}
-                                </Link>
+                                <Typography variant='button'>
+                                    <Link className={classes.link} to={`${match.url}/${post.id}`} id={post.id}>
+                                        Read more...
+                                    </Link>
+                                </Typography>
                             </div>
                         </Grid>
                     </Grid>

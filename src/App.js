@@ -17,6 +17,7 @@ const theme = createMuiTheme({
         },
     },
     smallPadding:'20px',
+    linkSize:'20px',
 });
 
 function App() {
