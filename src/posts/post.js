@@ -4,8 +4,11 @@ import {useParams} from "react-router-dom";
 
 export default function Post() {
     let {postId} = useParams()
-    console.log(postId)
+    let {postTitle} = useParams()
     return (
-        <h1>Requested Topic : {postId}</h1>
+        <div>
+            <h1>Requested Topic ID: {postId}</h1>
+            <h1>Requested Topic Title: {postTitle}</h1>
+        </div>
     )
 }

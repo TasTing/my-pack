@@ -5,8 +5,10 @@ import Header from "./header/header";
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+// Router
+import {BrowserRouter as Router} from "react-router-dom";
 
-// END
+
 const theme = createMuiTheme({
     palette: {
         primary: {
@@ -23,11 +25,13 @@ const theme = createMuiTheme({
 function App() {
     return (
         <ThemeProvider theme={theme}>
-            <div className="App">
-                <header className="App-header">
-                    <Header/>
-                </header>
-            </div>
+            <Router>
+                <div className="App">
+                    <header className="App-header">
+                        <Header/>
+                    </header>
+                </div>
+            </Router>
         </ThemeProvider>
     );
 }

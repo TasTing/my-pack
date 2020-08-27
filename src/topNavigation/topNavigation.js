@@ -16,11 +16,11 @@ import {CircularProgress} from "@material-ui/core";
 //Components
 import Main from '../demoMain/demoMain.js'
 import Posts from "../posts/posts";
-import Post from "../posts/post";
+
 // apollo graphql
 import {gql, useQuery} from '@apollo/client';
 // router
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {Switch, Route, Link} from "react-router-dom";
 // end
 
 
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'auto',
         background: 'rgba(255,255,255,0.3)',
     },
-    content:{
+    content: {
         margin: theme.smallPadding,
         padding: 'auto',
     }
@@ -72,48 +72,43 @@ export default function ClippedDrawer() {
     const classes = useStyles();
     // APOLLO query function
     const {loading, error, data} = useQuery(getHeader);
-    if (loading) return <CircularProgress />;
+    if (loading) return <CircularProgress/>;
     if (error) return <p>Error :(</p>;
 
     // END
     return (
         <div className={classes.root}>
-            <Router>
-                <CssBaseline/>
-                <AppBar position="fixed" className={classes.appBar}>
-                    <Toolbar>
-                        <Typography variant="h6" noWrap>{data.header.websiteName}</Typography>
-                    </Toolbar>
-                </AppBar>
-                <Drawer className={classes.drawer} variant="permanent" classes={{paper: classes.drawerPaper,}}>
-                    <Toolbar/>
-                    <div className={classes.drawerContainer}>
-                        <List> {data.header.topNav.map(menu => (
-                            <ListItem button key={menu.name} component={Link} to={menu.linkto}>
-                                <ListItemIcon>
-                                    {menu.name === 'Home' ? <HomeIcon/> : null}
-                                </ListItemIcon>
-                                <ListItemText primary={menu.name}/>
-                            </ListItem>
-                        ))}
-                        </List>
-                    </div>
-                </Drawer>
-                <main className={classes.content}>
-                    <Toolbar />
-                    <Switch>
-                        <Route exact path='/posts'>
-                            <Posts/>
-                        </Route>
-                        <Route exact path='/'>
-                            <Main/>
-                        </Route>
-                        <Route exact path='posts/:postId'>
-                            <Post/>
-                        </Route>
-                    </Switch>
-                </main>
-            </Router>
+            <CssBaseline/>
+            <AppBar position="fixed" className={classes.appBar}>
+                <Toolbar>
+                    <Typography variant="h6" noWrap>{data.header.websiteName}</Typography>
+                </Toolbar>
+            </AppBar>
+            <Drawer className={classes.drawer} variant="permanent" classes={{paper: classes.drawerPaper,}}>
+                <Toolbar/>
+                <div className={classes.drawerContainer}>
+                    <List> {data.header.topNav.map(menu => (
+                        <ListItem button key={menu.name} component={Link} to={menu.linkto}>
+                            <ListItemIcon>
+                                {menu.name === 'Home' ? <HomeIcon/> : null}
+                            </ListItemIcon>
+                            <ListItemText primary={menu.name}/>
+                        </ListItem>
+                    ))}
+                    </List>
+                </div>
+            </Drawer>
+            <main className={classes.content}>
+                <Toolbar/>
+                <Switch>
+                    <Route exact path='/'>
+                        <Main/>
+                    </Route>
+                    <Route path='/posts'>
+                        <Posts/>
+                    </Route>
+                </Switch>
+            </main>
         </div>
     );
 }
