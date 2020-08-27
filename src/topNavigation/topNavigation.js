@@ -12,6 +12,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
+import {CircularProgress} from "@material-ui/core";
 //Components
 import Main from '../demoMain/demoMain.js'
 import Posts from "../posts/posts";
@@ -71,7 +72,7 @@ export default function ClippedDrawer() {
     // APOLLO query function
     const {loading, error, data} = useQuery(getHeader);
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <CircularProgress />;
     if (error) return <p>Error :(</p>;
 
     // END

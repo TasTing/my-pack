@@ -6,6 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Link from '@material-ui/core/Link'
+import {CircularProgress} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     mainFeaturedPost: {
@@ -53,7 +54,7 @@ const getPosts = gql`
 export default function Posts() {
     // APOLLO query function
     const {loading, error, data} = useQuery(getPosts);
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <CircularProgress />;
     if (error) return <p>Error :(</p>;
     return (
         <MainFeaturedPost posts={data.posts}/>
@@ -67,7 +68,7 @@ function MainFeaturedPost(props) {
     return (
         <div>
             {posts.map(post => (
-                <Paper className={classes.mainFeaturedPost} style={{backgroundImage: `url(${post.featured.url})`}}>
+                <Paper key={post.id} className={classes.mainFeaturedPost} style={{backgroundImage: `url(${post.featured.url})`}}>
                     {/* Increase the priority of the hero background image */}
                     {<img style={{display: 'none'}} src={post.featured.url} alt={post.featured.alt}/>}
                     <div className={classes.overlay}/>
@@ -81,7 +82,7 @@ function MainFeaturedPost(props) {
                                     {post.content}
                                 </Typography>
                                 <Link variant="subtitle1" href="#">
-                                    {post.linkText}
+                                    {post.id}
                                 </Link>
                             </div>
                         </Grid>
