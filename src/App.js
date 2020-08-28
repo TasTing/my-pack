@@ -8,6 +8,8 @@ import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 // Router
 import {BrowserRouter as Router} from "react-router-dom";
 
+import {CloudinaryContext} from 'cloudinary-react';
+
 
 const theme = createMuiTheme({
     palette: {
@@ -18,19 +20,21 @@ const theme = createMuiTheme({
             main: green[500],
         },
     },
-    smallPadding:'20px',
-    linkSize:'20px',
+    smallPadding: '20px',
+    linkSize: '20px',
 });
 
 function App() {
     return (
         <ThemeProvider theme={theme}>
             <Router>
-                <div className="App">
-                    <header className="App-header">
-                        <Header/>
-                    </header>
-                </div>
+                <CloudinaryContext cloudName="hgapshuy2">
+                    <div className="App">
+                        <header className="App-header">
+                            <Header/>
+                        </header>
+                    </div>
+                </CloudinaryContext>
             </Router>
         </ThemeProvider>
     );
