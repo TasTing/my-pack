@@ -72,16 +72,18 @@ export default function Posts() {
     const {loading, error, data} = useQuery(getPosts);
     if (loading) return <CircularProgress/>;
     if (error) return <p>Error :(</p>;
+    let category = 'all'
     return (
-        <MainFeaturedPost posts={data.posts}/>
+        <MainFeaturedPost posts={data.posts} category={category}/>
     )
 }
 
 function MainFeaturedPost(props) {
     const classes = useStyles();
     const {posts} = props;
+    const {category} = props;
+    // categories are 'article', 'news' , 'record'
     let match = useRouteMatch();
-
     return (
         <div>
             <Switch>
@@ -103,7 +105,7 @@ function MainFeaturedPost(props) {
                                             {post.description}
                                         </Typography>
                                         <Typography variant="caption" color="inherit" paragraph align={"left"}>
-                                            Author: {post.user.username}
+                                            Author: {post.user==null?'匿名':post.user.username}
                                         </Typography>
                                         <Typography variant="caption" color="inherit" paragraph align={"left"}>
                                             {Date(post.created_at)}

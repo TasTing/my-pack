@@ -13,9 +13,7 @@ const useStyles = makeStyles((theme) => ({
         ...theme.typography.body2,
         padding: theme.spacing(3, 0),
     },
-    image:{
-
-    }
+    image: {}
 }));
 
 export default function Post() {
@@ -26,6 +24,11 @@ export default function Post() {
             post(id:${postId}){
                 id
                 title
+                created_at
+                category
+                user {
+                    username
+                }
                 featured{
                     url
                     provider_metadata
@@ -51,15 +54,24 @@ function Main(props) {
     const {post} = props;
 
     return (
-        <Grid item >
-            <Image publicId={post.featured.provider_metadata.public_id} loading="lazy" className={classes.image} sizes="100vw"/>
+        <Grid item>
+            <Image publicId={post.featured.provider_metadata.public_id} loading="lazy" className={classes.image}
+                   sizes="100vw"/>
             <Typography variant="h6" gutterBottom>
                 {post.title}
             </Typography>
+            <Typography variant="caption" color="inherit" align={"center"}>
+                <p>Author: {post.user == null ? '匿名' : post.user.username}</p>
+            </Typography>
+            <Typography variant="caption" color="inherit" align={"center"}>
+                <p>{Date(post.created_at)}</p>
+            </Typography>
             <Divider/>
-            <Markdown className={classes.markdown} key={post.id}>
-                {post.content}
-            </Markdown>
+            <Typography variant="body1" color="inherit" paragraph align={"center"} >
+                <Markdown className={classes.markdown} key={post.id}>
+                    {post.content}
+                </Markdown>
+            </Typography>
         </Grid>
     );
 }
