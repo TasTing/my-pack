@@ -52,9 +52,14 @@ const getPosts = gql`
         posts{
             id
             title
-            featured{
+            featured {
                 url
                 caption
+            }
+            created_at
+            category
+            user {
+                username
             }
             description
             content
@@ -96,6 +101,12 @@ function MainFeaturedPost(props) {
                                         </Typography>
                                         <Typography variant="h5" color="inherit" paragraph align={"left"}>
                                             {post.description}
+                                        </Typography>
+                                        <Typography variant="caption" color="inherit" paragraph align={"left"}>
+                                            Author: {post.user.username}
+                                        </Typography>
+                                        <Typography variant="caption" color="inherit" paragraph align={"left"}>
+                                            {Date(post.created_at)}
                                         </Typography>
                                         <Typography variant='button'>
                                             <Link className={classes.link} to={`${match.url}/${post.title}/${post.id}`} id={post.id}>
