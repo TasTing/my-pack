@@ -6,7 +6,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Grid, Typography} from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
 import Markdown from './Markdown';
-import {Image} from 'cloudinary-react';
+import {Image, Transformation} from 'cloudinary-react';
 
 const useStyles = makeStyles((theme) => ({
     markdown: {
@@ -56,7 +56,9 @@ function Main(props) {
     return (
         <Grid item>
             <Image publicId={post.featured.provider_metadata.public_id} loading="lazy" className={classes.image}
-                   sizes="100vw"/>
+                   sizes="100vw">
+                <Transformation quality="auto" fetchFormat="auto" />
+            </Image>
             <Typography variant="h6" gutterBottom>
                 {post.title}
             </Typography>

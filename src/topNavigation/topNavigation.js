@@ -98,17 +98,6 @@ export default function ClippedDrawer() {
                     </List>
                 </div>
             </Drawer>
-            <main className={classes.content}>
-                <Toolbar/>
-                <Switch>
-                    <Route exact path='/'>
-                        <Main/>
-                    </Route>
-                    <Route path='/posts'>
-                        <Posts/>
-                    </Route>
-                </Switch>
-            </main>
         </div>
     );
 }
