@@ -87,14 +87,15 @@ export default function ClippedDrawer() {
             <Drawer className={classes.drawer} variant="permanent" classes={{paper: classes.drawerPaper,}}>
                 <Toolbar/>
                 <div className={classes.drawerContainer}>
-                    <List> {data.header.topNav.map(menu => (
-                        <ListItem button key={menu.name} component={Link} to={menu.linkto}>
-                            <ListItemIcon>
-                                {menu.name === 'Home' ? <HomeIcon/> : null}
-                            </ListItemIcon>
-                            <ListItemText primary={menu.name}/>
-                        </ListItem>
-                    ))}
+                    <List>
+                        {data.header.topNav.map(menu => (
+                            <ListItem button key={menu.name} component={Link} to={menu.linkto}>
+                                <ListItemIcon>
+                                    {menu.name === 'Home' ? <HomeIcon/> : null}
+                                </ListItemIcon>
+                                <ListItemText primary={menu.name}/>
+                            </ListItem>
+                        ))}
                     </List>
                 </div>
             </Drawer>

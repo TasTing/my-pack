@@ -55,8 +55,13 @@ function Main(props) {
 
     return (
         <Grid item>
-            <Image publicId={post.featured.provider_metadata.public_id} loading="lazy" className={classes.image}
-                   sizes="100vw">
+            <Image publicId={post.featured.provider_metadata.public_id}
+                   dpr="auto"
+                   responsive
+                   width="auto"
+                   crop="scale"
+                   responsiveUseBreakpoints="true"
+                   >
                 <Transformation quality="auto" fetchFormat="auto" />
             </Image>
             <Typography variant="h6" gutterBottom>
