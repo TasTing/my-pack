@@ -29,7 +29,7 @@ const renderers = {
             <Transformation quality="auto" fetchFormat="auto"/>
         </Image>,
     heading: props =>
-        <Typography {...props} gutterBottom={true} variant={`h${props.level}`}/>,
+        <Typography {...props} gutterBottom={true} variant={`h${props.level+3}`}/>,
     paragraph: props =>
         <Typography {...props} paragraph={true} variant={"body1"}/>
 };
@@ -82,7 +82,7 @@ function Main(props) {
             >
                 <Transformation quality="auto" fetchFormat="auto"/>
             </Image>
-            <Typography variant="h2" gutterBottom>
+            <Typography variant="h3" gutterBottom>
                 {post.title}
             </Typography>
             <Typography variant="caption" color="inherit" align={"center"}>
