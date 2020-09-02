@@ -26,9 +26,8 @@ export default function Main() {
 
             <Grid container spacing={3}>
                 <Grid item xs>
-
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={12} md={8} >
                     <Toolbar/>
                     <Switch>
                         <Route exact path='/'>
@@ -40,7 +39,6 @@ export default function Main() {
                     </Switch>
                 </Grid>
                 <Grid item xs>
-
                 </Grid>
             </Grid>
         </main>

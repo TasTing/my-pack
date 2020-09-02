@@ -5,8 +5,8 @@ import {CircularProgress} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Grid, Typography} from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
-import Markdown from './Markdown';
 import {Image, Transformation} from 'cloudinary-react';
+import ReactMarkdown from "react-markdown";
 
 const useStyles = makeStyles((theme) => ({
     markdown: {
@@ -15,6 +15,24 @@ const useStyles = makeStyles((theme) => ({
     },
     image: {}
 }));
+
+const renderers = {
+    image: props =>
+        <Image
+            dpr="auto"
+            responsive
+            width="100%"
+            crop="scale"
+            responsiveUseBreakpoints="true"
+            {...props}
+        >
+            <Transformation quality="auto" fetchFormat="auto"/>
+        </Image>,
+    heading: props =>
+        <Typography {...props} gutterBottom={true} variant={`h${props.level}`}/>,
+    paragraph: props =>
+        <Typography {...props} paragraph={true} variant={"body1"}/>
+};
 
 export default function Post() {
     let {postId} = useParams()
@@ -54,17 +72,17 @@ function Main(props) {
     const {post} = props;
 
     return (
-        <Grid item>
-            <Image publicId={post.featured.provider_metadata.public_id}
+        <div>
+            <Image publicId={post.featured.url}
                    dpr="auto"
                    responsive
-                   width="auto"
+                   width="100%"
                    crop="scale"
                    responsiveUseBreakpoints="true"
-                   >
-                <Transformation quality="auto" fetchFormat="auto" />
+            >
+                <Transformation quality="auto" fetchFormat="auto"/>
             </Image>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h2" gutterBottom>
                 {post.title}
             </Typography>
             <Typography variant="caption" color="inherit" align={"center"}>
@@ -74,11 +92,14 @@ function Main(props) {
                 <p>{Date(post.created_at)}</p>
             </Typography>
             <Divider/>
-            <Typography variant="body1" color="inherit" paragraph align={"center"} >
-                <Markdown className={classes.markdown} key={post.id}>
-                    {post.content}
-                </Markdown>
+            <Typography variant="body1" color="inherit" paragraph align={"center"}>
+                <ReactMarkdown
+                    key={post.id}
+                    className={classes.markdown}
+                    source={post.content}
+                    renderers={renderers}
+                />
             </Typography>
-        </Grid>
+        </div>
     );
 }
