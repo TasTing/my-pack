@@ -7,6 +7,7 @@ import {Grid, Typography} from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
 import {Image, Transformation} from 'cloudinary-react';
 import ReactMarkdown from "react-markdown";
+import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
     markdown: {
@@ -92,14 +93,16 @@ function Main(props) {
                 <p>{Date(post.created_at)}</p>
             </Typography>
             <Divider/>
-            <Typography variant="body1" color="inherit" paragraph align={"center"}>
-                <ReactMarkdown
-                    key={post.id}
-                    className={classes.markdown}
-                    source={post.content}
-                    renderers={renderers}
-                />
-            </Typography>
+            <Container>
+                <Typography variant="body1" color="inherit" paragraph align={"center"}>
+                    <ReactMarkdown
+                        key={post.id}
+                        className={classes.markdown}
+                        source={post.content}
+                        renderers={renderers}
+                    />
+                </Typography>
+            </Container>
         </div>
     );
 }
