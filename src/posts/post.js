@@ -9,6 +9,8 @@ import {Image, Transformation} from 'cloudinary-react';
 import ReactMarkdown from "react-markdown";
 import Container from "@material-ui/core/Container";
 
+
+
 const useStyles = makeStyles((theme) => ({
     markdown: {
         ...theme.typography.body2,
@@ -38,7 +40,7 @@ const renderers = {
 export default function Post() {
     let {postId} = useParams()
 
-    const getPosts = gql`
+    const getPost = gql`
         query {
             post(id:${postId}){
                 id
@@ -59,7 +61,7 @@ export default function Post() {
         }
     `
 
-    const {loading, error, data} = useQuery(getPosts);
+    const {loading, error, data} = useQuery(getPost);
     if (loading) return <CircularProgress/>;
     if (error) return <p>Error :(</p>;
 

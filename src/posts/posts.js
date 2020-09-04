@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {gql, useQuery} from "@apollo/client";
+import {useQuery} from "@apollo/client";
+import gql from 'graphql-tag';
 import {makeStyles} from '@material-ui/core/styles';
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -13,6 +14,8 @@ import {
     useRouteMatch
 } from "react-router-dom";
 import Post from "./post";
+import { loader } from 'graphql.macro';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -66,6 +69,8 @@ const getPosts = gql`
         }
     }
 `
+
+
 
 export default function Posts() {
     // APOLLO query function
