@@ -10,7 +10,7 @@ import SwipeableTemporaryDrawer from "./swipeDrawer";
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        background:theme.palette.background,
+        background:theme.palette.secondary.main,
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -24,7 +24,7 @@ export default function ButtonAppBar() {
     const classes = useStyles();
 
     return (
-        <React.Fragment className={classes.root}>
+        <React.Fragment>
             <AppBar position="sticky">
                 <Toolbar>
                     <SwipeableTemporaryDrawer/>

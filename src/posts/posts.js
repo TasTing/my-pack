@@ -5,17 +5,16 @@ import gql from 'graphql-tag';
 import {makeStyles} from '@material-ui/core/styles';
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import {CircularProgress} from "@material-ui/core";
 import {
     Switch,
     Route,
-    Link,
     useRouteMatch
 } from "react-router-dom";
 import Post from "./post";
-import { loader } from 'graphql.macro';
-
+import Button from "@material-ui/core/Button";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
+
     },
     overlay: {
         position: 'absolute',
@@ -56,8 +56,10 @@ const getPosts = gql`
             id
             title
             featured {
+                id
                 url
                 caption
+                
             }
             created_at
             category
@@ -71,7 +73,6 @@ const getPosts = gql`
 `
 
 
-
 export default function Posts() {
     // APOLLO query function
     const {loading, error, data} = useQuery(getPosts);
@@ -83,10 +84,13 @@ export default function Posts() {
     )
 }
 
+function handleclick(props) {
+
+}
+
 function MainFeaturedPost(props) {
     const classes = useStyles();
     const {posts} = props;
-    const {category} = props;
     // categories are 'article', 'news' , 'record'
     let match = useRouteMatch();
     return (
@@ -94,43 +98,47 @@ function MainFeaturedPost(props) {
             <Switch>
                 <Route exact path={match.path}>
                     {posts.map(post => (
-                        <Paper key={post.id} className={classes.mainFeaturedPost}
-                               style={{backgroundImage: `url(${post.featured.url})`}}>
-                            {/* Increase the priority of the hero background image */}
-                            {<img style={{display: 'none'}} src={post.featured.url} alt={post.featured.alt}/>}
-                            <div className={classes.overlay}/>
-                            <Grid container>
-                                <Grid item md={12}>
-                                    <div className={classes.mainFeaturedPostContent}>
-                                        <Typography component="h1" variant="h3" color="inherit" gutterBottom
-                                                    align={"left"}>
-                                            {post.title}
-                                        </Typography>
-                                        <Typography variant="h5" color="inherit" paragraph align={"left"}>
-                                            {post.description}
-                                        </Typography>
-                                        <Typography variant="caption" color="inherit" paragraph align={"left"}>
-                                            Author: {post.user==null?'匿名':post.user.username}
-                                        </Typography>
-                                        <Typography variant="caption" color="inherit" paragraph align={"left"}>
-                                            {Date(post.created_at)}
-                                        </Typography>
-                                        <Typography variant='button'>
-                                            <Link className={classes.link} to={`${match.url}/${post.title}/${post.id}`} id={post.id}>
-                                                Read more...
-                                            </Link>
-                                        </Typography>
-                                    </div>
+                        <Box boxShadow={3} key={post.id}>
+                            <Paper className={classes.mainFeaturedPost}
+                                   style={{backgroundImage: `url(${post.featured.url})`}}>
+                                {/* Increase the priority of the hero background image */}
+                                {<img style={{display: 'none'}} id={post.featured.id} src={post.featured.url} alt={post.featured.alt}/>}
+                                <div className={classes.overlay}/>
+                                <Grid container>
+                                    <Grid item md={12}>
+                                        <div className={classes.mainFeaturedPostContent}>
+                                            <Typography component="h1" variant="h3" color="inherit" gutterBottom
+                                                        align={"left"}>
+                                                {post.title}
+                                            </Typography>
+                                            <Typography variant="h5" color="inherit" paragraph align={"left"}>
+                                                {post.description}
+                                            </Typography>
+                                            <Typography variant="caption" color="inherit" paragraph align={"left"}>
+                                                Author: {post.user == null ? '匿名' : post.user.username}
+                                            </Typography>
+                                            <Typography variant="caption" color="inherit" paragraph align={"left"}>
+                                                {Date(post.created_at)}
+                                            </Typography>
+                                            <Typography variant='button'>
+                                                <Button size='large' variant={"contained"} color={"default"}
+                                                        href={`${match.url}/${post.title}/${post.id}`}
+                                                        id={post.id}
+                                                        onClick={handleclick(`${match.url}/${post.title}/${post.id}`)}>
+                                                    Read more...
+                                                </Button>
+                                            </Typography>
+                                        </div>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Paper>
+                            </Paper>
+                        </Box>
                     ))}
                 </Route>
                 <Route path={`${match.path}/:postTitle/:postId`}>
-                    <Post />
+                    <Post/>
                 </Route>
             </Switch>
-
         </div>
     );
 }

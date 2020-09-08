@@ -10,7 +10,9 @@ import { ApolloProvider } from '@apollo/client';
 
 const client = new ApolloClient({
     uri: 'https://afternoon-shore-61229.herokuapp.com/graphql',
-    cache: new InMemoryCache()
+    cache: new InMemoryCache({
+
+    })
 });
 
 
