@@ -1,13 +1,14 @@
 import React from "react";
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import {gql, useQuery} from "@apollo/client";
 import {CircularProgress} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {Grid, Typography, Paper, Box} from "@material-ui/core";
+import {Grid, Typography, Paper, Box, Toolbar} from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
 import {Image, Transformation} from 'cloudinary-react';
 import ReactMarkdown from "react-markdown";
 import Container from "@material-ui/core/Container";
+import SimpleBreadCrumb from "../breadcrumbs/breadcrumb";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(3, 0),
     },
     image: {}
+
 }));
 
 const renderers = {
@@ -71,37 +73,53 @@ export default function Post() {
 function Main(props) {
     const classes = useStyles();
     const {post} = props;
-
+    const location = useLocation();
+    const links = [
+        {
+            name: 'Home',
+            link: '/'
+        }, {
+            name: 'Posts',
+            link: '/posts'
+        }, {
+            name: post.title,
+            link: location.pathname
+        }
+    ]
     return (
-        <Box boxShadow={3}>
-            <Paper>
-                <Image publicId={post.featured.url}
-                       dpr="auto"
-                       width="100%"
-                       crop="scale"
-                       responsiveUseBreakpoints="true"
-                >
-                    <Transformation quality="auto" fetchFormat="auto"/>
-                </Image>
-                <Typography variant="h3" gutterBottom>
-                    {post.title}
-                </Typography>
-                <Typography variant="caption" color="inherit" align={"center"}>
-                    <p>Author: {post.user == null ? '匿名' : post.user.username}</p>
-                </Typography>
-                <Typography variant="caption" color="inherit" align={"center"}>
-                    <p>{Date(post.created_at)}</p>
-                </Typography>
-                <Divider/>
-                <Container>
-                    <ReactMarkdown
-                        key={post.id}
-                        className={classes.markdown}
-                        source={post.content}
-                        renderers={renderers}
-                    />
-                </Container>
-            </Paper>
-        </Box>
+        <div>
+            <SimpleBreadCrumb links={links}/>
+            <Box boxShadow={3}>
+                <Paper>
+                    <Image publicId={post.featured.url}
+                           dpr="auto"
+                           width="100%"
+                           crop="scale"
+                           responsiveUseBreakpoints="true"
+                    >
+                        <Transformation quality="auto" fetchFormat="auto"/>
+                    </Image>
+                    <Toolbar/>
+                    <Typography variant="h3" gutterBottom>
+                        {post.title}
+                    </Typography>
+                    <Typography variant="caption" color="inherit" align={"center"}>
+                        <p>Author: {post.user == null ? '匿名' : post.user.username}</p>
+                    </Typography>
+                    <Typography variant="caption" color="inherit" align={"center"}>
+                        <p>{Date(post.created_at)}</p>
+                    </Typography>
+                    <Divider/>
+                    <Container>
+                        <ReactMarkdown
+                            key={post.id}
+                            className={classes.markdown}
+                            source={post.content}
+                            renderers={renderers}
+                        />
+                    </Container>
+                </Paper>
+            </Box>
+        </div>
     );
 }

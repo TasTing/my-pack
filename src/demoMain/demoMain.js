@@ -23,7 +23,6 @@ export default function Main() {
 
     return (
         <main className={classes.root}>
-
             <Grid container spacing={3}>
                 <Grid item xs>
                 </Grid>

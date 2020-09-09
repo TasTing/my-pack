@@ -15,7 +15,7 @@ import {
 } from "react-router-dom";
 import Post from "./post";
 import Button from "@material-ui/core/Button";
-
+import SimpleBreadCrumb from "../breadcrumbs/breadcrumb";
 
 const useStyles = makeStyles((theme) => ({
     mainFeaturedPost: {
@@ -59,7 +59,7 @@ const getPosts = gql`
                 id
                 url
                 caption
-                
+
             }
             created_at
             category
@@ -92,17 +92,28 @@ function MainFeaturedPost(props) {
     const classes = useStyles();
     const {posts} = props;
     // categories are 'article', 'news' , 'record'
+    const links = [
+        {
+            name: 'Home',
+            link: '/'
+        }, {
+            name: 'Posts',
+            link: '/posts'
+        }
+    ]
     let match = useRouteMatch();
     return (
         <div>
             <Switch>
                 <Route exact path={match.path}>
+                    <SimpleBreadCrumb links={links}/>
                     {posts.map(post => (
                         <Box boxShadow={3} key={post.id}>
                             <Paper className={classes.mainFeaturedPost}
                                    style={{backgroundImage: `url(${post.featured.url})`}}>
                                 {/* Increase the priority of the hero background image */}
-                                {<img style={{display: 'none'}} id={post.featured.id} src={post.featured.url} alt={post.featured.alt}/>}
+                                {<img style={{display: 'none'}} id={post.featured.id} src={post.featured.url}
+                                      alt={post.featured.alt}/>}
                                 <div className={classes.overlay}/>
                                 <Grid container>
                                     <Grid item md={12}>
