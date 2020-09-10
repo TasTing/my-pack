@@ -103,54 +103,52 @@ function MainFeaturedPost(props) {
     ]
     let match = useRouteMatch();
     return (
-        <div>
-            <Switch>
-                <Route exact path={match.path}>
-                    <SimpleBreadCrumb links={links}/>
-                    {posts.map(post => (
-                        <Box boxShadow={3} key={post.id}>
-                            <Paper className={classes.mainFeaturedPost}
-                                   style={{backgroundImage: `url(${post.featured.url})`}}>
-                                {/* Increase the priority of the hero background image */}
-                                {<img style={{display: 'none'}} id={post.featured.id} src={post.featured.url}
-                                      alt={post.featured.alt}/>}
-                                <div className={classes.overlay}/>
-                                <Grid container>
-                                    <Grid item md={12}>
-                                        <div className={classes.mainFeaturedPostContent}>
-                                            <Typography component="h1" variant="h3" color="inherit" gutterBottom
-                                                        align={"left"}>
-                                                {post.title}
-                                            </Typography>
-                                            <Typography variant="h5" color="inherit" paragraph align={"left"}>
-                                                {post.description}
-                                            </Typography>
-                                            <Typography variant="caption" color="inherit" paragraph align={"left"}>
-                                                Author: {post.user == null ? '匿名' : post.user.username}
-                                            </Typography>
-                                            <Typography variant="caption" color="inherit" paragraph align={"left"}>
-                                                {Date(post.created_at)}
-                                            </Typography>
-                                            <Typography variant='button'>
-                                                <Button size='large' variant={"contained"} color={"default"}
-                                                        href={`${match.url}/${post.title}/${post.id}`}
-                                                        id={post.id}
-                                                        onClick={handleclick(`${match.url}/${post.title}/${post.id}`)}>
-                                                    Read more...
-                                                </Button>
-                                            </Typography>
-                                        </div>
-                                    </Grid>
+        <Switch>
+            <Route exact path={match.path}>
+                <SimpleBreadCrumb links={links}/>
+                {posts.map(post => (
+                    <Box boxShadow={3} key={post.id}>
+                        <Paper className={classes.mainFeaturedPost}
+                               style={{backgroundImage: `url(${post.featured.url})`}}>
+                            {/* Increase the priority of the hero background image */}
+                            {<img style={{display: 'none'}} id={post.featured.id} src={post.featured.url}
+                                  alt={post.featured.alt}/>}
+                            <div className={classes.overlay}/>
+                            <Grid container>
+                                <Grid item md={12}>
+                                    <div className={classes.mainFeaturedPostContent}>
+                                        <Typography component="h1" variant="h3" color="inherit" gutterBottom
+                                                    align={"left"}>
+                                            {post.title}
+                                        </Typography>
+                                        <Typography variant="h5" color="inherit" paragraph align={"left"}>
+                                            {post.description}
+                                        </Typography>
+                                        <Typography variant="caption" color="inherit" paragraph align={"left"}>
+                                            Author: {post.user == null ? '匿名' : post.user.username}
+                                        </Typography>
+                                        <Typography variant="caption" color="inherit" paragraph align={"left"}>
+                                            {Date(post.created_at)}
+                                        </Typography>
+                                        <Typography variant='button'>
+                                            <Button size='large' variant={"contained"} color={"default"}
+                                                    href={`${match.url}/${post.title}/${post.id}`}
+                                                    id={post.id}
+                                                    onClick={handleclick(`${match.url}/${post.title}/${post.id}`)}>
+                                                Read more...
+                                            </Button>
+                                        </Typography>
+                                    </div>
                                 </Grid>
-                            </Paper>
-                        </Box>
-                    ))}
-                </Route>
-                <Route path={`${match.path}/:postTitle/:postId`}>
-                    <Post/>
-                </Route>
-            </Switch>
-        </div>
+                            </Grid>
+                        </Paper>
+                    </Box>
+                ))}
+            </Route>
+            <Route path={`${match.path}/:postTitle/:postId`}>
+                <Post/>
+            </Route>
+        </Switch>
     );
 }
 

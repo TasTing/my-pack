@@ -4,6 +4,7 @@ import {Grid} from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
 import {Route, Switch} from "react-router-dom";
 import Posts from "../posts/posts";
+import Cards from "../cardmedia/cards"
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +35,9 @@ export default function Main() {
                         </Route>
                         <Route path='/posts'>
                             <Posts/>
+                        </Route>
+                        <Route path='/cards'>
+                            <Cards/>
                         </Route>
                     </Switch>
                 </Grid>
