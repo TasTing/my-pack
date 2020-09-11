@@ -128,7 +128,7 @@ function MainFeaturedPost(props) {
                                             Author: {post.user == null ? '匿名' : post.user.username}
                                         </Typography>
                                         <Typography variant="caption" color="inherit" paragraph align={"left"}>
-                                            {Date(post.created_at)}
+                                            {Intl.DateTimeFormat('en', { weekday:'long',year:'numeric',month: 'short',day:'numeric' }).format(post.create_at)}
                                         </Typography>
                                         <Typography variant='button'>
                                             <Button size='large' variant={"contained"} color={"default"}

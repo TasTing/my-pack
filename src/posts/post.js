@@ -107,7 +107,7 @@ function Main(props) {
                         <p>Author: {post.user == null ? '匿名' : post.user.username}</p>
                     </Typography>
                     <Typography variant="caption" color="inherit" align={"center"}>
-                        <p>{Date(post.created_at)}</p>
+                        <p>{Intl.DateTimeFormat('en', { weekday:'long',year:'numeric',month: 'short',day:'numeric' }).format(post.create_at)}</p>
                     </Typography>
                     <Divider/>
                     <Container>
