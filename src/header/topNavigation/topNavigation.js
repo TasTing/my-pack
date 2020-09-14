@@ -14,8 +14,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import {CircularProgress} from "@material-ui/core";
 //Components
-import Main from '../demoMain/demoMain.js'
-import Posts from "../posts/posts";
+import Main from '../../demoMain/demoMain.js'
+import Posts from "../../posts/posts";
 
 // apollo graphql
 import {gql, useQuery} from '@apollo/client';

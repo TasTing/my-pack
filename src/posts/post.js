@@ -1,6 +1,6 @@
 import React from "react";
 import {useLocation, useParams} from "react-router-dom";
-import {gql, useQuery} from "@apollo/client";
+import {useQuery} from "@apollo/client";
 import {CircularProgress} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Typography, Paper, Box, Toolbar} from "@material-ui/core";
@@ -9,7 +9,8 @@ import {Image, Transformation} from 'cloudinary-react';
 import ReactMarkdown from "react-markdown";
 import Container from "@material-ui/core/Container";
 import SimpleBreadCrumb from "../breadcrumbs/breadcrumb";
-
+import {loader} from 'graphql.macro';
+const getPost = loader('../query/getPost.graphql');
 
 const useStyles = makeStyles((theme) => ({
     markdown: {
@@ -39,32 +40,9 @@ const renderers = {
 
 export default function Post() {
     let {postId} = useParams()
-
-    const getPost = gql`
-        query {
-            post(id:${postId}){
-                id
-                title
-                created_at
-                category
-                user {
-                    username
-                }
-                featured{
-                    url
-                    provider_metadata
-                }
-                description
-                content
-
-            }
-        }
-    `
-
-    const {loading, error, data} = useQuery(getPost);
+    const {loading, error, data} = useQuery(getPost,{variables:{ postId:postId }});
     if (loading) return <CircularProgress/>;
     if (error) return <p>Error :(</p>;
-
     return (
         <Main post={data.post}/>
     )

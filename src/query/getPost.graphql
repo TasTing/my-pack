@@ -1,0 +1,17 @@
+query getPost($postId:ID!){
+    post(id:$postId){
+        title
+        created_at
+        category
+        user {
+            username
+        }
+        featured{
+            url
+            provider_metadata
+        }
+        description
+        content
+
+    }
+}

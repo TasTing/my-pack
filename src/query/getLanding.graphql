@@ -19,23 +19,3 @@ query getLanding{
         }
     }
 }
-
-
-query getPosts{
-    posts{
-        id
-        title
-        featured {
-            id
-            url
-            caption
-
-        }
-        created_at
-        category
-        user {
-            username
-        }
-        description
-    }
-}

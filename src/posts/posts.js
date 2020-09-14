@@ -16,7 +16,7 @@ import Post from "./post";
 import Button from "@material-ui/core/Button";
 import SimpleBreadCrumb from "../breadcrumbs/breadcrumb";
 import { loader } from 'graphql.macro';
-const getPosts = loader('../currentUser.graphql');
+const getPosts = loader('../query/getPosts.graphql');
 
 const useStyles = makeStyles((theme) => ({
     mainFeaturedPost: {

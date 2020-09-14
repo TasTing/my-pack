@@ -23,7 +23,7 @@ export default function Main() {
     const classes = useStyles();
     return (
         <main className={classes.root}>
-            <Grid container spacing={3}>
+            <Grid container>
                 <Grid item xs>
                 </Grid>
                 <Grid item xs={12} md={8}>
