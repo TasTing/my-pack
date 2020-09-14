@@ -1,17 +1,10 @@
 import React from "react";
-import {Route, Switch, useRouteMatch} from "react-router-dom";
 import SimpleBreadCrumb from "../breadcrumbs/breadcrumb";
 import Box from "@material-ui/core/Box";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Post from "../posts/post";
-import Container from "@material-ui/core/Container";
 import IngredientReviewCard from "./card";
 import {gql, useQuery} from "@apollo/client";
 import {CircularProgress} from "@material-ui/core";
-
 
 export default function Cards() {
 

@@ -3,7 +3,7 @@ import {useLocation, useParams} from "react-router-dom";
 import {gql, useQuery} from "@apollo/client";
 import {CircularProgress} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {Grid, Typography, Paper, Box, Toolbar} from "@material-ui/core";
+import {Typography, Paper, Box, Toolbar} from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
 import {Image, Transformation} from 'cloudinary-react';
 import ReactMarkdown from "react-markdown";

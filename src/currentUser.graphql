@@ -1,0 +1,41 @@
+query getLanding{
+    landing{
+        feature{
+            title
+            description
+            image{
+                url
+            }
+            link
+        }
+        content
+        cards{
+            title
+            description
+            images{
+                url
+            }
+            link
+        }
+    }
+}
+
+
+query getPosts{
+    posts{
+        id
+        title
+        featured {
+            id
+            url
+            caption
+
+        }
+        created_at
+        category
+        user {
+            username
+        }
+        description
+    }
+}

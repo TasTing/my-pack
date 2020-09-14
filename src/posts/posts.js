@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {useQuery} from "@apollo/client";
-import gql from 'graphql-tag';
 import {makeStyles} from '@material-ui/core/styles';
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -16,6 +15,8 @@ import {
 import Post from "./post";
 import Button from "@material-ui/core/Button";
 import SimpleBreadCrumb from "../breadcrumbs/breadcrumb";
+import { loader } from 'graphql.macro';
+const getPosts = loader('../currentUser.graphql');
 
 const useStyles = makeStyles((theme) => ({
     mainFeaturedPost: {
@@ -49,28 +50,6 @@ const useStyles = makeStyles((theme) => ({
         float: 'left',
     }
 }));
-
-const getPosts = gql`
-    query {
-        posts{
-            id
-            title
-            featured {
-                id
-                url
-                caption
-
-            }
-            created_at
-            category
-            user {
-                username
-            }
-            description
-            content
-        }
-    }
-`
 
 
 export default function Posts() {
