@@ -1,0 +1,13 @@
+query getCard{
+    cards {
+        id
+        title
+        created_at
+        description
+        content
+        image{
+            id
+            url
+        }
+    }
+}

@@ -9,7 +9,6 @@ export default function MainBoard() {
     if (loading) return <CircularProgress/>;
     if (error) return <p>Error :(</p>;
 
-    console.log(data)
     return (
         <div>
 

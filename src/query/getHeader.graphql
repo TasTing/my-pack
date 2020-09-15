@@ -1,0 +1,9 @@
+query getHeader{
+    header{
+        websiteName
+        topNav {
+            name
+            linkto
+        }
+    }
+}

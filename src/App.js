@@ -17,7 +17,7 @@ import {CloudinaryContext} from 'cloudinary-react';
 const theme = createMuiTheme({
     palette: {
         primary: {
-            main: grey["600"],
+            main: grey["900"],
         },
         secondary: {
             main: purple[500],

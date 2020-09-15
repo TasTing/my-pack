@@ -5,13 +5,14 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
-import {gql, useQuery} from "@apollo/client";
+import {useQuery} from "@apollo/client";
 import {CircularProgress} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
+import {loader} from 'graphql.macro';
+const getHeader = loader('../../query/getHeader.graphql');
 
 const useStyles = makeStyles({
     list: {
@@ -24,18 +25,6 @@ const useStyles = makeStyles({
         background:'linear-gradient(135deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)'
     }
 });
-
-const getHeader = gql`
-    query {
-        header{
-            websiteName
-            topNav {
-                name
-                linkto
-            }
-        }
-    }
-`
 
 export default function SwipeableTemporaryDrawer() {
     const classes = useStyles();
