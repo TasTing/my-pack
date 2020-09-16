@@ -1,19 +1,21 @@
 import React from 'react';
 import ButtonAppBar from "./topNavigation/appBar";
 import {useLocation} from 'react-router-dom';
-import MainSlider from "./mainSlider";
-import {Grid, Box, Paper, Toolbar} from "@material-ui/core";
+import MainSlider from "./mainSlider/mainSlider";
+import {Grid, Box, Paper, Toolbar, Button} from "@material-ui/core";
 import Hidden from "@material-ui/core/Hidden";
-import SimpleCard from "./outlinedCard";
+import SimpleCard from "./mainSlider/outlinedCard";
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
     box: {
         position: "absolute",
-        zIndex: '1000',
+        zIndex: '5',
         width: '100%',
-        paddingTop: '30%',
-        opacity:0.6,
+        paddingTop: '20%',
+    },
+    slider: {
+        maxHeight: '900px',
     }
 });
 

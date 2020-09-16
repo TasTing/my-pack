@@ -103,7 +103,7 @@ type ComponentCardImageCard {
 type ComponentFeatureCardFeature {
     description: String
     id: ID!
-    image: UploadFile
+    image(limit: Int, sort: String, start: Int, where: JSON): [UploadFile]
     link: String
     title: String
 }
@@ -134,12 +134,12 @@ type Header {
 }
 
 type Landing {
-    cards: [ComponentCardImageCard]
     content: String
     created_at: DateTime!
     created_by: AdminUser
-    feature: ComponentFeatureCardFeature
     id: ID!
+    primaryCarousel(limit: Int, sort: String, start: Int, where: JSON): [UploadFile]
+    secondaryCarousel(limit: Int, sort: String, start: Int, where: JSON): [UploadFile]
     updated_at: DateTime!
     updated_by: AdminUser
 }
@@ -767,7 +767,7 @@ input ComponentCardImageCardInput {
 
 input ComponentFeatureCardFeatureInput {
     description: String
-    image: ID
+    image: [ID]
     link: String
     title: String
 }
@@ -815,10 +815,10 @@ input InputID {
 }
 
 input LandingInput {
-    cards: [ComponentCardImageCardInput]
     content: String
     created_by: ID
-    feature: ComponentFeatureCardFeatureInput
+    primaryCarousel: [ID]
+    secondaryCarousel: [ID]
     updated_by: ID
 }
 
@@ -921,7 +921,7 @@ input editComponentCardImageCardInput {
 input editComponentFeatureCardFeatureInput {
     description: String
     id: ID
-    image: ID
+    image: [ID]
     link: String
     title: String
 }
@@ -966,10 +966,10 @@ input editHeaderInput {
 }
 
 input editLandingInput {
-    cards: [editComponentCardImageCardInput]
     content: String
     created_by: ID
-    feature: editComponentFeatureCardFeatureInput
+    primaryCarousel: [ID]
+    secondaryCarousel: [ID]
     updated_by: ID
 }
 

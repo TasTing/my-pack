@@ -1,21 +1,13 @@
 query getLanding{
     landing{
-        feature{
-            title
-            description
-            image{
-                url
-            }
-            link
+        primaryCarousel{
+            id
+            url
         }
         content
-        cards{
-            title
-            description
-            images{
-                url
-            }
-            link
+        secondaryCarousel{
+            id
+            url
         }
     }
 }
