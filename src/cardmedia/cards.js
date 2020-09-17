@@ -2,7 +2,7 @@ import React from "react";
 import SimpleBreadCrumb from "../breadcrumbs/breadcrumb";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
-import IngredientReviewCard from "./card";
+import ReviewCard from "./card";
 import {useQuery} from "@apollo/client";
 import {CircularProgress} from "@material-ui/core";
 import { loader } from 'graphql.macro';
@@ -27,9 +27,12 @@ export default function Cards() {
         <div>
             <SimpleBreadCrumb links={links}/>
             <Box>
-                <Grid container spacing={3}>
+                <Grid container
+                      direction="row"
+                      spacing={1}
+                >
                     {data.cards.map(card => (
-                        <IngredientReviewCard card={card} key={card.id}/>
+                        <ReviewCard card={card} key={card.id}/>
                     ))}
                 </Grid>
             </Box>
