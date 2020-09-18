@@ -8,7 +8,6 @@ import {
     Box,
     Avatar,
     CircularProgress,
-    withTheme
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import axios from 'axios'
@@ -40,9 +39,17 @@ export default function GithubProfile() {
     const classes = useStyles();
     const BASE_URL = 'https://api.github.com/users/'
     const [user, setUser] = useState('tasting');
-    const [profile, setProfile] = useState(null)
+    const [profile={
+        login:String,
+        bio:String,
+        avatar_url:String,
+        followers:String,
+        following:String,
+        public_repos:String,
+        html_url:String,
+    }, setProfile] = useState(null)
     useEffect(() => {
-        if (profile === null) {
+        if (!profile) {
             axios.get(BASE_URL + user)
                 .then(res => {
                     const profile = res.data;
@@ -51,9 +58,7 @@ export default function GithubProfile() {
         }
     })
 
-
-    console.log(profile)
-    if (profile != null) {
+    if (profile) {
         return (
             <Box shadow={3}>
                 <Card className={classes.root}>
