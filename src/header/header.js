@@ -2,7 +2,7 @@ import React from 'react';
 import ButtonAppBar from "./topNavigation/appBar";
 import {useLocation} from 'react-router-dom';
 import MainSlider from "./mainSlider/mainSlider";
-import {Grid, Box, Paper, Toolbar, Button} from "@material-ui/core";
+import {Grid, Box} from "@material-ui/core";
 import Hidden from "@material-ui/core/Hidden";
 import SimpleCard from "./mainSlider/outlinedCard";
 import {makeStyles} from "@material-ui/core/styles";

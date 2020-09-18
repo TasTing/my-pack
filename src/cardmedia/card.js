@@ -15,12 +15,11 @@ import {
     DialogTitle,
     DialogContentText,
     DialogContent,
+    DialogActions,
+    Button
 } from '@material-ui/core';
 import {red} from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import Box from "@material-ui/core/Box";
 
@@ -55,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ReviewCard(props) {
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
     let {card} = props
     const [open, setOpen] = React.useState(false);
 
@@ -83,14 +81,11 @@ export default function ReviewCard(props) {
                             {card.content}
                         </DialogContentText>
                     </DialogContent>
-                    {/*<DialogActions>*/}
-                    {/*    <Button onClick={handleClose} color="primary">*/}
-                    {/*        Disagree*/}
-                    {/*    </Button>*/}
-                    {/*    <Button onClick={handleClose} color="primary" autoFocus>*/}
-                    {/*        Agree*/}
-                    {/*    </Button>*/}
-                    {/*</DialogActions>*/}
+                    <DialogActions>
+                        <Button onClick={handleClose} color="primary" autoFocus={true}>
+                            Close
+                        </Button>
+                    </DialogActions>
                 </Dialog>
             </div>
         )
@@ -106,11 +101,11 @@ export default function ReviewCard(props) {
                                 I
                             </Avatar>
                         }
-                        action={
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon/>
-                            </IconButton>
-                        }
+                        // action={
+                        //     <IconButton aria-label="settings">
+                        //         <MoreVertIcon/>
+                        //     </IconButton>
+                        // }
                         title={
                             <Typography>{card.title}</Typography>
                         }
@@ -139,11 +134,9 @@ export default function ReviewCard(props) {
                         {/*    <ShareIcon/>*/}
                         {/*</IconButton>*/}
                         <IconButton
-                            className={clsx(classes.expand, {
-                                [classes.expandOpen]: expanded,
-                            })}
+                            className={clsx(classes.expand)}
                             onClick={handleOpen}
-                            aria-expanded={expanded}
+
                             aria-label="show more"
                         >
                             <ExpandMoreIcon/>

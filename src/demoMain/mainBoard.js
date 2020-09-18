@@ -1,9 +1,11 @@
 import React from 'react';
 import {loader} from 'graphql.macro';
 import {useQuery} from "@apollo/client";
-import {CircularProgress, Typography} from "@material-ui/core";
+import {CircularProgress, Grid, Typography} from "@material-ui/core";
 import ReactMarkdown from "react-markdown";
 import {Image, Transformation} from "cloudinary-react";
+import SideBar from "./sideBar";
+
 const getLanding = loader('../query/getLanding.graphql');
 
 const renderers = {
@@ -28,11 +30,16 @@ export default function MainBoard() {
     if (loading) return <CircularProgress/>;
     if (error) return <p>Error :(</p>;
     return (
-        <div>
-            <ReactMarkdown
-                source={data.landing.content}
-                renderers={renderers}
-            />
-        </div>
+        <Grid container={true}>
+            <Grid item={true} xs={12} md={8}>
+                <ReactMarkdown
+                    source={data.landing.content}
+                    renderers={renderers}
+                />
+            </Grid>
+            <Grid item={true} xs={12} md={4}>
+                <SideBar/>
+            </Grid>
+        </Grid>
     )
 }
