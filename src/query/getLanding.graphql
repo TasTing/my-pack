@@ -5,9 +5,5 @@ query getLanding{
             url
         }
         content
-        secondaryCarousel{
-            id
-            url
-        }
     }
 }

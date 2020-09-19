@@ -5,16 +5,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 // APOLLO PACKAGES
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const client = new ApolloClient({
+    cache: new InMemoryCache(),
     uri: 'https://afternoon-shore-61229.herokuapp.com/graphql',
-    cache: new InMemoryCache({
-
-    })
 });
-
 
 ReactDOM.render(
   <React.StrictMode>

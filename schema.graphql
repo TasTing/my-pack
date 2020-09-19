@@ -137,9 +137,9 @@ type Landing {
     content: String
     created_at: DateTime!
     created_by: AdminUser
+    headerCard: ComponentFeatureCardFeature
     id: ID!
     primaryCarousel(limit: Int, sort: String, start: Int, where: JSON): [UploadFile]
-    secondaryCarousel(limit: Int, sort: String, start: Int, where: JSON): [UploadFile]
     updated_at: DateTime!
     updated_by: AdminUser
 }
@@ -817,8 +817,8 @@ input InputID {
 input LandingInput {
     content: String
     created_by: ID
+    headerCard: ComponentFeatureCardFeatureInput
     primaryCarousel: [ID]
-    secondaryCarousel: [ID]
     updated_by: ID
 }
 
@@ -968,8 +968,8 @@ input editHeaderInput {
 input editLandingInput {
     content: String
     created_by: ID
+    headerCard: editComponentFeatureCardFeatureInput
     primaryCarousel: [ID]
-    secondaryCarousel: [ID]
     updated_by: ID
 }
 

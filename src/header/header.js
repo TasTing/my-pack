@@ -29,11 +29,11 @@ function Header() {
                     <Grid item md={3}/>
                     <Grid item md={6}>
                         <div style={{position: "relative"}}>
-                            <FloatContent/>
+                            {/*<FloatContent/>*/}
                         </div>
                     </Grid>
                     <Grid item md={3}/>
-                    <MainSlider/>
+                    {/*<MainSlider/>*/}
                 </Hidden>
             </Grid>
         )

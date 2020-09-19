@@ -30,8 +30,8 @@ export default function MainBoard() {
     if (loading) return <CircularProgress/>;
     if (error) return <p>Error :(</p>;
     return (
-        <Grid container={true}>
-            <Grid item={true} xs={12} md={8}>
+        <Grid container>
+            <Grid item xs={12} md={8}>
                 <ReactMarkdown
                     source={data.landing.content}
                     renderers={renderers}
