@@ -24,7 +24,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
-    root: {},
+    root: {
+        background: 'rgba(255,255,255,0.2)',
+    },
     media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
@@ -68,26 +70,24 @@ export default function ReviewCard(props) {
     const TransitionModal = (props) => {
         let card = props
         return (
-            <div>
-                <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                >
-                    <DialogTitle id="alert-dialog-title">{card.title}</DialogTitle>
-                    <DialogContent dividers={true}>
-                        <DialogContentText id="alert-dialog-description">
-                            {card.content}
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose} color="primary" autoFocus={true}>
-                            Close
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </div>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{card.title}</DialogTitle>
+                <DialogContent dividers={true}>
+                    <DialogContentText id="alert-dialog-description">
+                        {card.content}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary" autoFocus={true}>
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
         )
     }
 

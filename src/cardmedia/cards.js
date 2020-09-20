@@ -4,8 +4,9 @@ import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import ReviewCard from "./card";
 import {useQuery} from "@apollo/client";
-import {CircularProgress} from "@material-ui/core";
-import { loader } from 'graphql.macro';
+import {CircularProgress, Hidden} from "@material-ui/core";
+import {loader} from 'graphql.macro';
+
 const getCards = loader('../query/getCards.graphql');
 
 export default function Cards() {
@@ -25,7 +26,9 @@ export default function Cards() {
 
     return (
         <div>
-            <SimpleBreadCrumb links={links}/>
+            <Hidden mdDown>
+                <SimpleBreadCrumb links={links}/>
+            </Hidden>
             <Box>
                 <Grid container
                       direction="row"

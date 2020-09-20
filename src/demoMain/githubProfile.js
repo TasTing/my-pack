@@ -9,7 +9,6 @@ import {
     Avatar,
     CircularProgress,
     Grid,
-    Link
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import axios from 'axios'
@@ -62,11 +61,6 @@ export default function GithubProfile() {
         }
     }, [user, profile])
 
-    const handleOnChange = (e) => {
-        setUser(e.target.value)
-    }
-
-
     if (profile) {
         return (
             <Box shadow={3}>
@@ -83,17 +77,17 @@ export default function GithubProfile() {
                               direction="row"
                               justify="center"
                               alignItems="center">
-                            <Grid item lg={4} xs={12}>
+                            <Grid item xl={4} xs={12}>
                                 <Typography>
                                     Followers:{profile.followers}
                                 </Typography>
                             </Grid>
-                            <Grid item lg={4} xs={12}>
+                            <Grid item xl={4} xs={12}>
                                 <Typography>
                                     Following:{profile.following}
                                 </Typography>
                             </Grid>
-                            <Grid item lg={4} xs={12}>
+                            <Grid item xl={4} xs={12}>
                                 <Typography>
                                     Repository:{profile.public_repos}
                                 </Typography>

@@ -5,7 +5,7 @@ schema {
     mutation: Mutation
 }
 
-union Morph = Card | CardAggregator | CardConnection | CardConnectionContent | CardConnectionCreated_at | CardConnectionCreated_by | CardConnectionDescription | CardConnectionId | CardConnectionImage | CardConnectionTitle | CardConnectionUpdated_at | CardConnectionUpdated_by | CardGroupBy | ComponentCardImageCard | ComponentFeatureCardFeature | ComponentMenuNavMenu | Gallery | Header | Landing | Post | PostAggregator | PostConnection | PostConnectionCategory | PostConnectionContent | PostConnectionCreated_at | PostConnectionCreated_by | PostConnectionDescription | PostConnectionFeatured | PostConnectionId | PostConnectionTitle | PostConnectionUpdated_at | PostConnectionUpdated_by | PostConnectionUser | PostGroupBy | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_at | UploadFileConnectionCreated_by | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_at | UploadFileConnectionUpdated_by | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionCreated_by | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionUpdated_by | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionCreated_by | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUpdated_by | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | createCardPayload | createPostPayload | createRolePayload | createUserPayload | deleteCardPayload | deleteGalleryPayload | deleteHeaderPayload | deleteLandingPayload | deletePostPayload | deleteRolePayload | deleteUserPayload | updateCardPayload | updateGalleryPayload | updateHeaderPayload | updateLandingPayload | updatePostPayload | updateRolePayload | updateUserPayload
+union Morph = Card | CardAggregator | CardConnection | CardConnectionContent | CardConnectionCreated_at | CardConnectionCreated_by | CardConnectionDescription | CardConnectionId | CardConnectionImage | CardConnectionTitle | CardConnectionUpdated_at | CardConnectionUpdated_by | CardGroupBy | Category | CategoryAggregator | CategoryConnection | CategoryConnectionCreated_at | CategoryConnectionCreated_by | CategoryConnectionId | CategoryConnectionName | CategoryConnectionUpdated_at | CategoryConnectionUpdated_by | CategoryGroupBy | ComponentCardImageCard | ComponentFeatureCardFeature | ComponentMenuNavMenu | Gallery | Header | Landing | Post | PostAggregator | PostConnection | PostConnectionContent | PostConnectionCreated_at | PostConnectionCreated_by | PostConnectionDescription | PostConnectionFeatured | PostConnectionId | PostConnectionTitle | PostConnectionUpdated_at | PostConnectionUpdated_by | PostConnectionUser | PostGroupBy | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_at | UploadFileConnectionCreated_by | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_at | UploadFileConnectionUpdated_by | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionCreated_by | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionUpdated_by | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionCreated_by | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUpdated_by | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | createCardPayload | createCategoryPayload | createPostPayload | createRolePayload | createUserPayload | deleteCardPayload | deleteCategoryPayload | deleteGalleryPayload | deleteHeaderPayload | deleteLandingPayload | deletePostPayload | deleteRolePayload | deleteUserPayload | updateCardPayload | updateCategoryPayload | updateGalleryPayload | updateHeaderPayload | updateLandingPayload | updatePostPayload | updateRolePayload | updateUserPayload
 
 type AdminUser {
     id: ID!
@@ -13,6 +13,7 @@ type AdminUser {
 }
 
 type Card {
+    categories(limit: Int, sort: String, start: Int, where: JSON): [Category]
     content: String
     created_at: DateTime!
     created_by: AdminUser
@@ -92,6 +93,67 @@ type CardGroupBy {
     updated_by: [CardConnectionUpdated_by]
 }
 
+type Category {
+    cards(limit: Int, sort: String, start: Int, where: JSON): [Card]
+    created_at: DateTime!
+    created_by: AdminUser
+    id: ID!
+    name: String
+    posts(limit: Int, sort: String, start: Int, where: JSON): [Post]
+    updated_at: DateTime!
+    updated_by: AdminUser
+}
+
+type CategoryAggregator {
+    count: Int
+    totalCount: Int
+}
+
+type CategoryConnection {
+    aggregate: CategoryAggregator
+    groupBy: CategoryGroupBy
+    values: [Category]
+}
+
+type CategoryConnectionCreated_at {
+    connection: CategoryConnection
+    key: DateTime
+}
+
+type CategoryConnectionCreated_by {
+    connection: CategoryConnection
+    key: ID
+}
+
+type CategoryConnectionId {
+    connection: CategoryConnection
+    key: ID
+}
+
+type CategoryConnectionName {
+    connection: CategoryConnection
+    key: String
+}
+
+type CategoryConnectionUpdated_at {
+    connection: CategoryConnection
+    key: DateTime
+}
+
+type CategoryConnectionUpdated_by {
+    connection: CategoryConnection
+    key: ID
+}
+
+type CategoryGroupBy {
+    created_at: [CategoryConnectionCreated_at]
+    created_by: [CategoryConnectionCreated_by]
+    id: [CategoryConnectionId]
+    name: [CategoryConnectionName]
+    updated_at: [CategoryConnectionUpdated_at]
+    updated_by: [CategoryConnectionUpdated_by]
+}
+
 type ComponentCardImageCard {
     description: String
     id: ID!
@@ -146,12 +208,14 @@ type Landing {
 
 type Mutation {
     createCard(input: createCardInput): createCardPayload
+    createCategory(input: createCategoryInput): createCategoryPayload
     createPost(input: createPostInput): createPostPayload
     "Create a new role"
     createRole(input: createRoleInput): createRolePayload
     "Create a new user"
     createUser(input: createUserInput): createUserPayload
     deleteCard(input: deleteCardInput): deleteCardPayload
+    deleteCategory(input: deleteCategoryInput): deleteCategoryPayload
     deleteGallery: deleteGalleryPayload
     deleteHeader: deleteHeaderPayload
     deleteLanding: deleteLandingPayload
@@ -167,6 +231,7 @@ type Mutation {
     register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
     resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
     updateCard(input: updateCardInput): updateCardPayload
+    updateCategory(input: updateCategoryInput): updateCategoryPayload
     updateGallery(input: updateGalleryInput): updateGalleryPayload
     updateHeader(input: updateHeaderInput): updateHeaderPayload
     updateLanding(input: updateLandingInput): updateLandingPayload
@@ -179,7 +244,7 @@ type Mutation {
 }
 
 type Post {
-    category: ENUM_POST_CATEGORY
+    categories(limit: Int, sort: String, start: Int, where: JSON): [Category]
     content: String
     created_at: DateTime!
     created_by: AdminUser
@@ -201,11 +266,6 @@ type PostConnection {
     aggregate: PostAggregator
     groupBy: PostGroupBy
     values: [Post]
-}
-
-type PostConnectionCategory {
-    connection: PostConnection
-    key: String
 }
 
 type PostConnectionContent {
@@ -259,7 +319,6 @@ type PostConnectionUser {
 }
 
 type PostGroupBy {
-    category: [PostConnectionCategory]
     content: [PostConnectionContent]
     created_at: [PostConnectionCreated_at]
     created_by: [PostConnectionCreated_by]
@@ -276,6 +335,9 @@ type Query {
     card(id: ID!): Card
     cards(limit: Int, sort: String, start: Int, where: JSON): [Card]
     cardsConnection(limit: Int, sort: String, start: Int, where: JSON): CardConnection
+    categories(limit: Int, sort: String, start: Int, where: JSON): [Category]
+    categoriesConnection(limit: Int, sort: String, start: Int, where: JSON): CategoryConnection
+    category(id: ID!): Category
     files(limit: Int, sort: String, start: Int, where: JSON): [UploadFile]
     filesConnection(limit: Int, sort: String, start: Int, where: JSON): UploadFileConnection
     gallery: Gallery
@@ -670,6 +732,10 @@ type createCardPayload {
     card: Card
 }
 
+type createCategoryPayload {
+    category: Category
+}
+
 type createPostPayload {
     post: Post
 }
@@ -684,6 +750,10 @@ type createUserPayload {
 
 type deleteCardPayload {
     card: Card
+}
+
+type deleteCategoryPayload {
+    category: Category
 }
 
 type deleteGalleryPayload {
@@ -712,6 +782,10 @@ type deleteUserPayload {
 
 type updateCardPayload {
     card: Card
+}
+
+type updateCategoryPayload {
+    category: Category
 }
 
 type updateGalleryPayload {
@@ -743,18 +817,21 @@ enum CacheControlScope {
     PUBLIC
 }
 
-enum ENUM_POST_CATEGORY {
-    article
-    news
-    record
-}
-
 input CardInput {
+    categories: [ID]
     content: String
     created_by: ID
     description: String
     image: ID
     title: String
+    updated_by: ID
+}
+
+input CategoryInput {
+    cards: [ID]
+    created_by: ID
+    name: String
+    posts: [ID]
     updated_by: ID
 }
 
@@ -823,7 +900,7 @@ input LandingInput {
 }
 
 input PostInput {
-    category: ENUM_POST_CATEGORY
+    categories: [ID]
     content: String
     created_by: ID
     description: String
@@ -873,6 +950,10 @@ input createCardInput {
     data: CardInput
 }
 
+input createCategoryInput {
+    data: CategoryInput
+}
+
 input createPostInput {
     data: PostInput
 }
@@ -889,6 +970,10 @@ input deleteCardInput {
     where: InputID
 }
 
+input deleteCategoryInput {
+    where: InputID
+}
+
 input deletePostInput {
     where: InputID
 }
@@ -902,11 +987,20 @@ input deleteUserInput {
 }
 
 input editCardInput {
+    categories: [ID]
     content: String
     created_by: ID
     description: String
     image: ID
     title: String
+    updated_by: ID
+}
+
+input editCategoryInput {
+    cards: [ID]
+    created_by: ID
+    name: String
+    posts: [ID]
     updated_by: ID
 }
 
@@ -974,7 +1068,7 @@ input editLandingInput {
 }
 
 input editPostInput {
-    category: ENUM_POST_CATEGORY
+    categories: [ID]
     content: String
     created_by: ID
     description: String
@@ -1010,6 +1104,11 @@ input editUserInput {
 
 input updateCardInput {
     data: editCardInput
+    where: InputID
+}
+
+input updateCategoryInput {
+    data: editCategoryInput
     where: InputID
 }
 

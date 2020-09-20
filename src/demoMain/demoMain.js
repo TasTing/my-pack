@@ -1,6 +1,6 @@
 import React from 'react';
 import {Grid} from "@material-ui/core";
-import Toolbar from "@material-ui/core/Toolbar";
+import {Toolbar, Hidden} from "@material-ui/core";
 import {Route, Switch} from "react-router-dom";
 import Posts from "../posts/posts";
 import Cards from "../cardmedia/cards"
@@ -27,7 +27,9 @@ export default function Main() {
                 <Grid item xs>
                 </Grid>
                 <Grid item xs={12} md={8}>
-                    <Toolbar/>
+                    <Hidden mdDown>
+                        <Toolbar/>
+                    </Hidden>
                     <Switch>
                         <Route exact path='/'>
                             <MainBoard/>

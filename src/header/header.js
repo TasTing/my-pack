@@ -1,23 +1,8 @@
 import React from 'react';
 import ButtonAppBar from "./topNavigation/appBar";
 import {useLocation} from 'react-router-dom';
-import MainSlider from "./mainSlider/mainSlider";
-import {Grid, Box} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import Hidden from "@material-ui/core/Hidden";
-import SimpleCard from "./mainSlider/outlinedCard";
-import {makeStyles} from "@material-ui/core/styles";
-
-const useStyles = makeStyles({
-    box: {
-        position: "absolute",
-        zIndex: '5',
-        width: '100%',
-        paddingTop: '20%',
-    },
-    slider: {
-        maxHeight: '900px',
-    }
-});
 
 function Header() {
     const location = useLocation()
@@ -44,15 +29,15 @@ function Header() {
     }
 }
 
-function FloatContent() {
-    const classes = useStyles();
-    return (
-        <Box shadow={3} className={classes.box}>
-            <SimpleCard/>
-        </Box>
-
-    )
-}
+// function FloatContent() {
+//     const classes = useStyles();
+//     return (
+//         <Box shadow={3} className={classes.box}>
+//             <SimpleCard/>
+//         </Box>
+//
+//     )
+// }
 
 
 export default Header

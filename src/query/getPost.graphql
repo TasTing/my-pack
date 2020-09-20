@@ -2,7 +2,9 @@ query getPost($postId:ID!){
     post(id:$postId){
         title
         created_at
-        category
+        categories{
+            name
+        }
         user {
             username
         }

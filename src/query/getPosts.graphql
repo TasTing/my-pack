@@ -9,7 +9,9 @@ query getPosts{
 
         }
         created_at
-        category
+        categories{
+            name
+        }
         user {
             username
         }

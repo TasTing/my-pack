@@ -1,10 +1,11 @@
 import React from 'react';
 import {loader} from 'graphql.macro';
 import {useQuery} from "@apollo/client";
-import {CircularProgress, Grid, Typography} from "@material-ui/core";
+import {CircularProgress, Container, Divider, Grid, Typography} from "@material-ui/core";
 import ReactMarkdown from "react-markdown";
 import {Image, Transformation} from "cloudinary-react";
 import SideBar from "./sideBar";
+import SideCard from "./sideCard";
 
 const getLanding = loader('../query/getLanding.graphql');
 
@@ -39,6 +40,12 @@ export default function MainBoard() {
             </Grid>
             <Grid item={true} xs={12} md={4}>
                 <SideBar/>
+            </Grid>
+            <Grid item={true} xs={12}>
+                <Divider/>
+                <Container>
+                    <SideCard/>
+                </Container>
             </Grid>
         </Grid>
     )
