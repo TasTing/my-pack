@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
+import {withStyles} from '@material-ui/core/styles';
+import {green} from '@material-ui/core/colors';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -10,6 +10,10 @@ import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import Grid from "@material-ui/core/Grid";
 import PostList from "./list";
+import {CircularProgress, Container} from "@material-ui/core";
+import { loader } from 'graphql.macro';
+import {useQuery} from "@apollo/client";
+const getPosts = loader('../query/getPosts.graphql');
 
 const GreenCheckbox = withStyles({
     root: {
@@ -25,69 +29,49 @@ export default function CheckboxLabels(props) {
     const [state, setState] = React.useState({
         checkedA: true,
         checkedB: true,
-        checkedF: true,
-        checkedG: true,
+        checkedC: true,
+        checkedD: true,
+        checkedE: true,
     });
 
+    const {loading, error, data} = useQuery(getPosts,{variables:{filter:'feature'}});
+    // requires modification
+    if (loading) return <CircularProgress/>;
+    if (error) return <p>Error :(</p>;
+
+    const posts = data.posts
+
     const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
+        setState({...state, [event.target.name]: event.target.checked});
+        if(event.target.checked===false){
+            console.log(event.target.name)
+            console.log(posts)
+        }
     };
 
-    let posts=props.posts
-    console.log(state)
 
     return (
         <Grid>
-            <FormGroup row>
-                <FormControlLabel
-                    control={<Checkbox checked={state.checkedA} onChange={handleChange} name="checkedA" />}
-                    label="Secondary"
-                />
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={state.checkedB}
-                            onChange={handleChange}
-                            name="checkedB"
-                            color="primary"
-                        />
-                    }
-                    label="Primary"
-                />
-                <FormControlLabel control={<Checkbox name="checkedC" />} label="Uncontrolled" />
-                <FormControlLabel disabled control={<Checkbox name="checkedD" />} label="Disabled" />
-                <FormControlLabel disabled control={<Checkbox checked name="checkedE" />} label="Disabled" />
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={state.checkedF}
-                            onChange={handleChange}
-                            name="checkedF"
-                            indeterminate
-                        />
-                    }
-                    label="Indeterminate"
-                />
-                <FormControlLabel
-                    control={<GreenCheckbox checked={state.checkedG} onChange={handleChange} name="checkedG" />}
-                    label="Custom color"
-                />
-                <FormControlLabel
-                    control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
-                    label="Custom icon"
-                />
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
-                            checkedIcon={<CheckBoxIcon fontSize="small" />}
-                            name="checkedI"
-                        />
-                    }
-                    label="Custom size"
-                />
-            </FormGroup>
-            <PostList posts={posts}/>
+            <Container>
+                <FormGroup row>
+                    <FormControlLabel
+                        control={<GreenCheckbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}
+                                                checked={state.checkedA} onChange={handleChange} name="checkedA"/>}
+                        label="Article"
+                    />
+                    <FormControlLabel
+                        control={<GreenCheckbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}
+                                                checked={state.checkedB} onChange={handleChange} name="checkedB"/>}
+                        label="Feature"
+                    />
+                    <FormControlLabel
+                        control={<GreenCheckbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}
+                                                checked={state.checkedC} onChange={handleChange} name="checkedC"/>}
+                        label="News"
+                    />
+                </FormGroup>
+                <PostList posts={posts}/>
+            </Container>
         </Grid>
     );
 }

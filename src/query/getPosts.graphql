@@ -1,5 +1,5 @@
-query getPosts{
-    posts{
+query getPosts($filter:String){
+    posts(where:{categories:{name:$filter}}){
         id
         title
         featured {
