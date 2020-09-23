@@ -1,4 +1,5 @@
-import React from 'react';
+import {useQuery} from "@apollo/client";
+import React, {useEffect, useState} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import {green} from '@material-ui/core/colors';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -11,8 +12,9 @@ import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import Grid from "@material-ui/core/Grid";
 import PostList from "./list";
 import {CircularProgress, Container} from "@material-ui/core";
-import { loader } from 'graphql.macro';
-import {useQuery} from "@apollo/client";
+import {loader} from 'graphql.macro';
+
+
 const getPosts = loader('../query/getPosts.graphql');
 
 const GreenCheckbox = withStyles({
@@ -26,29 +28,39 @@ const GreenCheckbox = withStyles({
 })((props) => <Checkbox color="default" {...props} />);
 
 export default function CheckboxLabels(props) {
-    const [state, setState] = React.useState({
-        checkedA: true,
-        checkedB: true,
-        checkedC: true,
+    const [state, setState] = useState({
+        article: true,
+        feature: true,
+        news: true,
         checkedD: true,
         checkedE: true,
     });
 
-    const {loading, error, data} = useQuery(getPosts,{variables:{filter:'feature'}});
+    useEffect(() => {
+        if (state.article === false) {
+            console.log(state.article)
+        }
+        if (state.feature === false) {
+            console.log(state.feature)
+        }
+        if (state.news === false) {
+            console.log(state.news)
+        }
+    }, [state])
+
+    const Loading = () => {
+
+    }
+
+    const {loading, error, data} = useQuery(getPosts);
     // requires modification
     if (loading) return <CircularProgress/>;
     if (error) return <p>Error :(</p>;
-
     const posts = data.posts
 
     const handleChange = (event) => {
         setState({...state, [event.target.name]: event.target.checked});
-        if(event.target.checked===false){
-            console.log(event.target.name)
-            console.log(posts)
-        }
     };
-
 
     return (
         <Grid>
@@ -56,17 +68,17 @@ export default function CheckboxLabels(props) {
                 <FormGroup row>
                     <FormControlLabel
                         control={<GreenCheckbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}
-                                                checked={state.checkedA} onChange={handleChange} name="checkedA"/>}
+                                                checked={state.article} onChange={handleChange} name="article"/>}
                         label="Article"
                     />
                     <FormControlLabel
                         control={<GreenCheckbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}
-                                                checked={state.checkedB} onChange={handleChange} name="checkedB"/>}
+                                                checked={state.feature} onChange={handleChange} name="feature"/>}
                         label="Feature"
                     />
                     <FormControlLabel
                         control={<GreenCheckbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}
-                                                checked={state.checkedC} onChange={handleChange} name="checkedC"/>}
+                                                checked={state.news} onChange={handleChange} name="news"/>}
                         label="News"
                     />
                 </FormGroup>

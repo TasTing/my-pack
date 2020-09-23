@@ -39,7 +39,7 @@ export default function SideCard() {
                     count++
                     return (<MediaCard post={post} key={post.id}/>)
                 }
-                return(<Divider/>)
+                return(<Divider key={'divider'}/>)
             }
         )
     );
@@ -49,7 +49,7 @@ const MediaCard = (props) => {
     const classes = useStyles();
     let {post} = props
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} key={post.id}>
             <Grid container>
                 <Grid item xs={12} md={6}>
                     <CardActionArea href={`/posts/${post.title}/${post.id}`}>
