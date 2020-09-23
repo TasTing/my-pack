@@ -13,7 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import PostList from "./list";
 import {CircularProgress, Container} from "@material-ui/core";
 import {loader} from 'graphql.macro';
-
+import posts from "./posts";
 
 const getPosts = loader('../query/getPosts.graphql');
 
@@ -34,6 +34,7 @@ export default function CheckboxLabels(props) {
         news: true,
         checkedD: true,
         checkedE: true,
+        posts: props.posts
     });
 
     useEffect(() => {
@@ -48,15 +49,6 @@ export default function CheckboxLabels(props) {
         }
     }, [state])
 
-    const Loading = () => {
-
-    }
-
-    const {loading, error, data} = useQuery(getPosts);
-    // requires modification
-    if (loading) return <CircularProgress/>;
-    if (error) return <p>Error :(</p>;
-    const posts = data.posts
 
     const handleChange = (event) => {
         setState({...state, [event.target.name]: event.target.checked});
@@ -82,7 +74,7 @@ export default function CheckboxLabels(props) {
                         label="News"
                     />
                 </FormGroup>
-                <PostList posts={posts}/>
+                <PostList posts={state.posts} state={state}/>
             </Container>
         </Grid>
     );

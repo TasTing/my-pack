@@ -48,49 +48,60 @@ export default function PostList(props) {
     const classes = useStyles();
     let match = useRouteMatch();
     let posts = props.posts
-    return (
-        posts.map(post => (
-            <Box boxShadow={3} key={post.id}>
-                <Paper className={classes.mainFeaturedPost}
-                       style={{backgroundImage: `url(${post.featured.url})`}}>
-                    {/* Increase the priority of the hero background image */}
-                    {<img style={{display: 'none'}} id={post.featured.id} src={post.featured.url}
-                          alt={post.featured.alt}/>}
-                    <div className={classes.overlay}/>
-                    <Grid container>
-                        <Grid item md={12}>
-                            <div className={classes.mainFeaturedPostContent}>
-                                <Typography component="h1" variant="h3" color="inherit" gutterBottom
-                                            align={"left"}>
-                                    {post.title}
-                                </Typography>
-                                <Typography variant="h5" color="inherit" paragraph align={"left"}>
-                                    {post.description}
-                                </Typography>
-                                <Typography variant="caption" color="inherit" paragraph align={"left"}>
-                                    Author: {post.user == null ? '匿名' : post.user.username}
-                                </Typography>
-                                <Typography variant="caption" color="inherit" paragraph align={"left"}>
-                                    {Intl.DateTimeFormat('en', {
-                                        weekday: 'long',
-                                        year: 'numeric',
-                                        month: 'short',
-                                        day: 'numeric'
-                                    }).format(post.create_at)}
-                                </Typography>
-                                <Typography variant='button'>
-                                    <Button size='large' variant={"contained"} color={"default"}
-                                            href={`${match.url}/${post.title}/${post.id}`}
-                                            id={post.id}
-                                            onClick={handleclick(`${match.url}/${post.title}/${post.id}`)}>
-                                        Read more...
-                                    </Button>
-                                </Typography>
-                            </div>
-                        </Grid>
-                    </Grid>
-                </Paper>
-            </Box>
-        ))
+    let state = props.state
+    console.log(state)
+    console.log(posts)
+    const HiddenPost = (props) => (
+        <Paper className={classes.mainFeaturedPost}
+               style={{backgroundImage: `url(${props.post.featured.url})`}}>
+            {/* Increase the priority of the hero background image */}
+            {<img style={{display: 'none'}} id={props.post.featured.id} src={props.post.featured.url}
+                  alt={props.post.featured.alt}/>}
+            <div className={classes.overlay}/>
+            <Grid container>
+                <Grid item md={12}>
+                    <div className={classes.mainFeaturedPostContent}>
+                        <Typography component="h1" variant="h3" color="inherit" gutterBottom
+                                    align={"left"}>
+                            {props.post.title}
+                        </Typography>
+                        <Typography variant="h5" color="inherit" paragraph align={"left"}>
+                            {props.post.description}
+                        </Typography>
+                        <Typography variant="caption" color="inherit" paragraph align={"left"}>
+                            Author: {props.post.user == null ? '匿名' : props.post.user.username}
+                        </Typography>
+                        <Typography variant="caption" color="inherit" paragraph align={"left"}>
+                            {Intl.DateTimeFormat('en', {
+                                weekday: 'long',
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric'
+                            }).format(props.post.create_at)}
+                        </Typography>
+                        <Typography variant='button'>
+                            <Button size='large' variant={"contained"} color={"default"}
+                                    href={`${match.url}/${props.post.title}/${props.post.id}`}
+                                    id={props.post.id}
+                                    onClick={handleclick(`${match.url}/${props.post.title}/${props.post.id}`)}>
+                                Read more...
+                            </Button>
+                        </Typography>
+                    </div>
+                </Grid>
+            </Grid>
+        </Paper>
     )
+
+    if (posts != ['Loading']) {
+        return (
+            posts.map(post => (
+                <Box boxShadow={3} key={post.id}>
+                    {
+                        post.categories.some(category => (category.name === 'feature' && state.feature == true || category.name === 'news' && state.news == true || category.name === 'article' && state.article == true)) ?
+                            <HiddenPost post={post}/> : null
+                    }
+                </Box>
+            )))
+    }
 }

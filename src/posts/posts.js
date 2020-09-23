@@ -10,19 +10,27 @@ import {
 import Post from "./post";
 import SimpleBreadCrumb from "../breadcrumbs/breadcrumb";
 import CheckboxLabels from "./checkbox";
+import {loader} from 'graphql.macro';
 
 
+const getPosts = loader('../query/getPosts.graphql');
 
 
 export default function Posts() {
     // APOLLO query function
+    const {loading, error, data} = useQuery(getPosts);
+    // requires modification
+    if (loading) return <CircularProgress/>;
+    if (error) return <p>Error :(</p>;
+
     return (
-        <MainFeaturedPost />
+        <MainFeaturedPost posts={data.posts}/>
     )
 }
 
-function MainFeaturedPost() {
+function MainFeaturedPost(props) {
     let match = useRouteMatch();
+    let posts = props.posts
     const links = [
         {
             name: 'Home',
@@ -39,7 +47,7 @@ function MainFeaturedPost() {
                 <Hidden mdDown>
                     <SimpleBreadCrumb links={links}/>
                 </Hidden>
-                <CheckboxLabels/>
+                <CheckboxLabels posts={posts}/>
             </Route>
             <Route path={`${match.path}/:postTitle/:postId`}>
                 <Post/>
