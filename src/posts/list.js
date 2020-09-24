@@ -55,12 +55,14 @@ export default function PostList(props) {
         posts.map(post => (
             <Box boxShadow={3} key={post.id}>
                 {
-                    post.categories.some(category => (category.name === 'feature' & state.feature === true | category.name === 'news' & state.news === true | category.name === 'article' & state.article === true)) ?
+                    post.categories.some(category => ((category.name === 'feature' && state.feature === true) || (category.name === 'news' && state.news === true) || (category.name === 'article' && state.article === true))) ?
                         <HiddenPost post={post}/> : null
                 }
             </Box>
         )))
 }
+
+
 
 const HiddenPost = (props) => {
     let post = props.post

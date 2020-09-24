@@ -1,21 +1,14 @@
-import {useQuery} from "@apollo/client";
 import React, {useEffect, useState} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import {green} from '@material-ui/core/colors';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import Grid from "@material-ui/core/Grid";
 import PostList from "./list";
-import {CircularProgress, Container} from "@material-ui/core";
-import {loader} from 'graphql.macro';
-import posts from "./posts";
-
-const getPosts = loader('../query/getPosts.graphql');
+import {Container} from "@material-ui/core";
 
 const GreenCheckbox = withStyles({
     root: {
