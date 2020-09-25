@@ -7,6 +7,7 @@ import {Image, Transformation} from "cloudinary-react";
 import SideBar from "./sideBar";
 import SideCard from "./sideCard";
 
+
 const getLanding = loader('../query/getLanding.graphql');
 
 const renderers = {
