@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '100vh',
+        minHeight: '60vh',
     },
     main: {
         marginTop: theme.spacing(8),
@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function StickyFooter() {
     const classes = useStyles();
-
     return (
         <div className={classes.root}>
             <CssBaseline />

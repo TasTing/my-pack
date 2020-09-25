@@ -20,11 +20,20 @@ const useStyles = makeStyles({
         background: 'rgba(255,255,255,0.2)',
         marginTop: 10,
         marginBottom: 10,
+        display: "flex",
+        flexDirection: "column",
+        position: 'relative',
     },
     media: {
         height: 200,
     },
-
+    content:{
+        marginBottom:50,
+    },
+    buttonGroup: {
+        position: 'absolute',
+        bottom: 0,
+    },
 });
 
 export default function SideCard() {
@@ -37,9 +46,11 @@ export default function SideCard() {
                 let count = 0
                 if (post.categories.some(category => (category.name === 'feature')) && count < 3) {
                     count++
-                    return (<MediaCard post={post} key={post.id}/>)
+                    return (
+                        <MediaCard post={post} key={post.id}/>
+                    )
                 }
-                return(<Divider key={'divider'}/>)
+                return (null)
             }
         )
     );
@@ -61,7 +72,7 @@ const MediaCard = (props) => {
                     </CardActionArea>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <CardContent>
+                    <CardContent className={classes.content}>
                         <Typography gutterBottom variant="h6" component="h6">
                             {post.title}
                         </Typography>
@@ -69,7 +80,7 @@ const MediaCard = (props) => {
                             {sliceWord(post.description)}
                         </Typography>
                     </CardContent>
-                    <CardActions>
+                    <CardActions className={classes.buttonGroup}>
                         <Button size="small" color="primary">
                             Share
                         </Button>

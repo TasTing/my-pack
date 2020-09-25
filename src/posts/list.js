@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-
     },
     overlay: {
         position: 'absolute',
@@ -34,10 +33,9 @@ const useStyles = makeStyles((theme) => ({
             padding: theme.spacing(6),
             // paddingRight: 0,
         },
+        justifyContent:'left',
+        textAlign:'justify',
     },
-    link: {
-        float: 'left',
-    }
 }));
 
 function handleclick(props) {
@@ -62,14 +60,13 @@ export default function PostList(props) {
         )))
 }
 
-
-
 const HiddenPost = (props) => {
     let post = props.post
     const classes = useStyles();
     let match = useRouteMatch();
     return (
         <Paper className={classes.mainFeaturedPost}
+               key={post.id}
                style={{backgroundImage: `url(${post.featured.url})`}}>
             {/* Increase the priority of the hero background image */}
             {<img style={{display: 'none'}} id={post.featured.id} src={post.featured.url}
@@ -78,17 +75,16 @@ const HiddenPost = (props) => {
             <Grid container>
                 <Grid item md={12}>
                     <div className={classes.mainFeaturedPostContent}>
-                        <Typography component="h1" variant="h3" color="inherit" gutterBottom
-                                    align={"left"}>
+                        <Typography component="h1" variant="h3" color="inherit" gutterBottom>
                             {post.title}
                         </Typography>
-                        <Typography variant="h5" color="inherit" paragraph align={"left"}>
+                        <Typography variant="h5" color="inherit" paragraph>
                             {post.description}
                         </Typography>
-                        <Typography variant="caption" color="inherit" paragraph align={"left"}>
+                        <Typography variant="caption" color="inherit" paragraph>
                             Author: {post.user == null ? '匿名' : post.user.username}
                         </Typography>
-                        <Typography variant="caption" color="inherit" paragraph align={"left"}>
+                        <Typography variant="caption" color="inherit" paragraph>
                             {Intl.DateTimeFormat('en', {
                                 weekday: 'long',
                                 year: 'numeric',
@@ -96,8 +92,8 @@ const HiddenPost = (props) => {
                                 day: 'numeric'
                             }).format(post.create_at)}
                         </Typography>
-                        <Typography align={"left"}>
-                            {post.categories.map(category => (<span>|{category.name}|</span>))}
+                        <Typography>
+                            {post.categories.map(category => (<span key={category.name}>|{category.name}|</span>))}
                         </Typography>
                         <Typography variant='button'>
                             <Button size='large' variant={"contained"} color={"default"}

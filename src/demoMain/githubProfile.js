@@ -18,6 +18,7 @@ const useStyles = makeStyles({
         width: "100%",
         maxHeight: 600,
         background: 'rgba(255,255,255,0.2)',
+        marginBottom:10,
     },
     bullet: {
         display: 'inline-block',
@@ -66,6 +67,9 @@ export default function GithubProfile() {
             <Box shadow={3}>
                 <Card className={classes.root}>
                     <CardContent>
+                        <Typography align={"left"}>
+                            My Github Profile:
+                        </Typography>
                         <Avatar src={profile.avatar_url} className={classes.avatar}/>
                         <Typography className={classes.title} color="textSecondary" gutterBottom>
                             {profile.login}

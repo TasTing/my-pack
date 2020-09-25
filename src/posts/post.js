@@ -1,7 +1,7 @@
 import React from "react";
 import {useLocation, useParams} from "react-router-dom";
 import {useQuery} from "@apollo/client";
-import {CircularProgress} from "@material-ui/core";
+import {CircularProgress, Hidden} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Typography, Paper, Box, Toolbar} from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
@@ -25,7 +25,7 @@ const renderers = {
     image: props =>
         <Image
             dpr="auto"
-            width="100%"
+            width="80%"
             crop="scale"
             responsiveUseBreakpoints="true"
             {...props}
@@ -66,14 +66,15 @@ function Main(props) {
     ]
     return (
         <div>
-            <SimpleBreadCrumb links={links}/>
+            <Hidden mdDown>
+                <SimpleBreadCrumb links={links}/>
+            </Hidden>
             <Box boxShadow={3}>
                 <Paper>
                     <Image publicId={post.featured.url}
                            dpr="auto"
                            width="100%"
                            crop="scale"
-                           responsiveUseBreakpoints="true"
                     >
                         <Transformation quality="auto" fetchFormat="auto"/>
                     </Image>

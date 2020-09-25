@@ -1,7 +1,7 @@
 import React from 'react';
 import {loader} from 'graphql.macro';
 import {useQuery} from "@apollo/client";
-import {CircularProgress, Container, Divider, Grid, Typography} from "@material-ui/core";
+import {Box, CircularProgress, Container, Divider, Grid, Toolbar, Typography} from "@material-ui/core";
 import ReactMarkdown from "react-markdown";
 import {Image, Transformation} from "cloudinary-react";
 import SideBar from "./sideBar";
@@ -42,11 +42,22 @@ export default function MainBoard() {
                 <SideBar/>
             </Grid>
             <Grid item={true} xs={12}>
-                <Divider/>
-                <Container>
-                    <SideCard/>
-                </Container>
+                <SideCardWrapper/>
             </Grid>
         </Grid>
     )
 }
+
+const SideCardWrapper = () => (
+    <Box>
+        <Toolbar/>
+        <Container>
+            <Typography variant={"h4"} align={"left"}>Check out whats NEW!</Typography>
+        </Container>
+        <Divider/>
+        <Container>
+            <SideCard/>
+        </Container>
+        <Divider/>
+    </Box>
+)

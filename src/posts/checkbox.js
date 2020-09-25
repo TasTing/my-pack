@@ -31,15 +31,7 @@ export default function CheckboxLabels(props) {
     });
 
     useEffect(() => {
-        if (state.article === false) {
-            console.log(state.article)
-        }
-        if (state.feature === false) {
-            console.log(state.feature)
-        }
-        if (state.news === false) {
-            console.log(state.news)
-        }
+
     }, [state])
 
 

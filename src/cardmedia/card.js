@@ -8,7 +8,6 @@ import {
     CardContent,
     CardActions,
     Grid,
-    Avatar,
     IconButton,
     Typography,
     Dialog,
@@ -18,8 +17,8 @@ import {
     DialogActions,
     Button
 } from '@material-ui/core';
+import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import {red} from '@material-ui/core/colors';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import Box from "@material-ui/core/Box";
 
@@ -33,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
     },
     expand: {
         transform: 'rotate(0deg)',
-        marginLeft: 'auto',
         transition: theme.transitions.create('transform', {
             duration: theme.transitions.duration.shortest,
         }),
@@ -52,6 +50,9 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
+    content:{
+
+    }
 }));
 
 export default function ReviewCard(props) {
@@ -92,15 +93,10 @@ export default function ReviewCard(props) {
     }
 
     return (
-        <Grid item xs={12} md={4}>
-            <Box boxShadow={3}>
+        <Grid item xs={6} md={4}>
+            <Box boxShadow={3} className={classes.content}>
                 <Card className={classes.root}>
                     <CardHeader
-                        avatar={
-                            <Avatar aria-label="recipe" className={classes.avatar}>
-                                I
-                            </Avatar>
-                        }
                         // action={
                         //     <IconButton aria-label="settings">
                         //         <MoreVertIcon/>
@@ -123,7 +119,7 @@ export default function ReviewCard(props) {
                     />
                     <CardContent>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {card.description}
+                            {sliceWord(card.description)}
                         </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
@@ -133,13 +129,16 @@ export default function ReviewCard(props) {
                         {/*<IconButton aria-label="share">*/}
                         {/*    <ShareIcon/>*/}
                         {/*</IconButton>*/}
+                        <Typography>
+                            Learn more
+                        </Typography>
                         <IconButton
                             className={clsx(classes.expand)}
                             onClick={handleOpen}
 
                             aria-label="show more"
                         >
-                            <ExpandMoreIcon/>
+                            <FullscreenIcon/>
                         </IconButton>
                     </CardActions>
                     <TransitionModal title={card.title} content={card.content}/>
@@ -147,4 +146,28 @@ export default function ReviewCard(props) {
             </Box>
         </Grid>
     );
+}
+
+const sliceWord = (content) => {
+    let templateWord = '';
+    const len = 100;
+    if (content.length * 2 <= len) {
+        return content;
+    }
+    let strLength = 0;
+    for (let i = 0; i < content.length; i++) {
+        templateWord = templateWord + content.charAt(i)
+        if (content.charCodeAt(i) > (len / 4)) {
+            strLength = strLength + 2;
+            if (strLength >= len) {
+                return templateWord.substring(0, templateWord.length - 1) + '...'
+            }
+        } else {
+            strLength = strLength + 1
+            if (strLength >= len) {
+                return templateWord.substring(0, templateWord.length - 2) + '...'
+            }
+        }
+    }
+    return templateWord;
 }
