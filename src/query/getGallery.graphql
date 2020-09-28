@@ -1,0 +1,13 @@
+query{
+    gallery{
+        imageCard{
+            id
+            link
+            title
+            description
+            images{
+                url
+            }
+        }
+    }
+}

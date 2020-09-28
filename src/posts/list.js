@@ -46,8 +46,6 @@ export default function PostList(props) {
 
     let posts = props.posts
     let state = props.state
-    console.log(state)
-    console.log(posts)
 
     return (
         posts.map(post => (
