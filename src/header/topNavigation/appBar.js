@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SwipeableTemporaryDrawer from "./swipeDrawer";
+import Banner from "../banner/banner";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -20,20 +21,24 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar(props) {
     const classes = useStyles();
-
+    let websiteName = props.header.websiteName
+    let topNav = props.header.topNav
     return (
         <React.Fragment>
-            <AppBar position="sticky">
+            <AppBar position="fixed">
                 <Toolbar>
-                    <SwipeableTemporaryDrawer/>
+                    <SwipeableTemporaryDrawer topnav={topNav}/>
                     <Typography variant="h6" className={classes.title}>
-                        Ting 的小基地
+                        {websiteName}
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
+            <Toolbar/>
+            <Banner location={props.location} topnav={topNav}/>
+            {/*more content*/}
         </React.Fragment>
     );
 }

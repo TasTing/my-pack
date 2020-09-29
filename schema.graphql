@@ -171,6 +171,7 @@ type ComponentFeatureCardFeature {
 }
 
 type ComponentMenuNavMenu {
+    board: UploadFile
     id: ID!
     linkto: String
     name: String
@@ -850,6 +851,7 @@ input ComponentFeatureCardFeatureInput {
 }
 
 input ComponentMenuNavMenuInput {
+    board: ID
     linkto: String
     name: String
 }
@@ -1021,6 +1023,7 @@ input editComponentFeatureCardFeatureInput {
 }
 
 input editComponentMenuNavMenuInput {
+    board: ID
     id: ID
     linkto: String
     name: String

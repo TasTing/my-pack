@@ -7,12 +7,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
-import {useQuery} from "@apollo/client";
-import {CircularProgress} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
-import {loader} from 'graphql.macro';
-const getHeader = loader('../../query/getHeader.graphql');
+
 
 const useStyles = makeStyles({
     list: {
@@ -26,21 +23,15 @@ const useStyles = makeStyles({
     }
 });
 
-export default function SwipeableTemporaryDrawer() {
+export default function SwipeableTemporaryDrawer(props) {
     const classes = useStyles();
-
+    const topNav = props.topnav
     const [state, setState] = React.useState({
         top: false,
         left: false,
         bottom: false,
         right: false,
     });
-
-    // APOLLO query function
-    const {loading, error, data} = useQuery(getHeader);
-    if (loading) return <CircularProgress/>;
-    if (error) return <p>Error :(</p>;
-
     const toggleDrawer = (anchor, open) => (event) => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
@@ -57,7 +48,7 @@ export default function SwipeableTemporaryDrawer() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List >
-                {data.header.topNav.map(menu => (
+                {topNav.map(menu => (
                     <ListItem button key={menu.name} component={Link} to={menu.linkto}>
                         <ListItemIcon>
                             {menu.name === 'Home' ? <HomeIcon/> : null}
