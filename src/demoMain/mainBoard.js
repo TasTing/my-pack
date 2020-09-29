@@ -4,8 +4,8 @@ import {useQuery} from "@apollo/client";
 import {Box, CircularProgress, Container, Divider, Grid, Toolbar, Typography} from "@material-ui/core";
 import ReactMarkdown from "react-markdown";
 import {Image, Transformation} from "cloudinary-react";
-import SideBar from "./sideBar";
-import SideCard from "./sideCard";
+import SideBar from "./sideBar/sideBar";
+import FeatureCard from "./featureCard";
 
 
 const getLanding = loader('../query/getLanding.graphql');
@@ -57,7 +57,7 @@ const SideCardWrapper = () => (
         </Container>
         <Divider/>
         <Container>
-            <SideCard/>
+            <FeatureCard/>
         </Container>
         <Divider/>
     </Box>

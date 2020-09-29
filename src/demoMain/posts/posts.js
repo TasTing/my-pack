@@ -8,12 +8,12 @@ import {
     useRouteMatch
 } from "react-router-dom";
 import Post from "./post";
-import SimpleBreadCrumb from "../breadcrumbs/breadcrumb";
+import SimpleBreadCrumb from "../../breadcrumbs/breadcrumb";
 import CheckboxLabels from "./checkbox";
 import {loader} from 'graphql.macro';
 
 
-const getPosts = loader('../query/getPosts.graphql');
+const getPosts = loader('../../query/getPosts.graphql');
 
 
 export default function Posts() {

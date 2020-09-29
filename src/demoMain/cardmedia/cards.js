@@ -1,5 +1,5 @@
 import React from "react";
-import SimpleBreadCrumb from "../breadcrumbs/breadcrumb";
+import SimpleBreadCrumb from "../../breadcrumbs/breadcrumb";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import ReviewCard from "./card";
@@ -7,7 +7,7 @@ import {useQuery} from "@apollo/client";
 import {CircularProgress, Hidden} from "@material-ui/core";
 import {loader} from 'graphql.macro';
 
-const getCards = loader('../query/getCards.graphql');
+const getCards = loader('../../query/getCards.graphql');
 
 export default function Cards() {
     const {loading, error, data} = useQuery(getCards);

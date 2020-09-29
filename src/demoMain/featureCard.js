@@ -36,7 +36,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function SideCard() {
+export default function FeatureCard() {
     const {loading, error, data} = useQuery(getPosts);
     if (loading) return <CircularProgress/>;
     if (error) return <p>Error :(</p>;

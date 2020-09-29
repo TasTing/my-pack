@@ -10,16 +10,6 @@ function Header() {
         return (
             <Grid container>
                 <ButtonAppBar/>
-                <Hidden mdDown>
-                    <Grid item md={3}/>
-                    <Grid item md={6}>
-                        <div style={{position: "relative"}}>
-                            {/*<FloatContent/>*/}
-                        </div>
-                    </Grid>
-                    <Grid item md={3}/>
-                    {/*<MainSlider/>*/}
-                </Hidden>
             </Grid>
         )
     } else {

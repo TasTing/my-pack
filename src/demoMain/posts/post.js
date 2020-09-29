@@ -8,9 +8,9 @@ import Divider from '@material-ui/core/Divider';
 import {Image, Transformation} from 'cloudinary-react';
 import ReactMarkdown from "react-markdown";
 import Container from "@material-ui/core/Container";
-import SimpleBreadCrumb from "../breadcrumbs/breadcrumb";
+import SimpleBreadCrumb from "../../breadcrumbs/breadcrumb";
 import {loader} from 'graphql.macro';
-const getPost = loader('../query/getPost.graphql');
+const getPost = loader('../../query/getPost.graphql');
 
 const useStyles = makeStyles((theme) => ({
     markdown: {

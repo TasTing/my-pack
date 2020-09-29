@@ -2,8 +2,8 @@ import React from 'react';
 import {Grid} from "@material-ui/core";
 import {Toolbar, Hidden} from "@material-ui/core";
 import {Route, Switch} from "react-router-dom";
-import Posts from "../posts/posts";
-import Cards from "../cardmedia/cards"
+import Posts from "./posts/posts";
+import Cards from "./cardmedia/cards"
 import {makeStyles} from "@material-ui/core/styles";
 import MainBoard from "./mainBoard";
 

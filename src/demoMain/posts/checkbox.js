@@ -12,7 +12,7 @@ import {CircularProgress, Container} from "@material-ui/core";
 import {useQuery} from "@apollo/client";
 import {loader} from 'graphql.macro';
 
-const getCategories = loader('../query/getCategories.graphql');
+const getCategories = loader('../../query/getCategories.graphql');
 const GreenCheckbox = withStyles({
     root: {
         color: red[400],
