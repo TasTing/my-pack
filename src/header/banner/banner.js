@@ -1,24 +1,42 @@
 import React from "react";
-import { Parallax, Background } from 'react-parallax';
+import {Parallax, Background} from 'react-parallax';
+import {makeStyles} from "@material-ui/core/styles";
+import {Container} from "@material-ui/core";
 
-export default function Banner(props){
+const useStyles = makeStyles((theme) => ({
+    title: {
+        fontSize: "10vh",
+        position: 'absolute',
+        paddingTop: 100,
+        textAlign: 'center',
+        color:'white',
+    }
+}));
+
+export default function Banner(props) {
+    const classes = useStyles();
     let topNav = props.topnav
     let location = props.location
-    return(
-        topNav.map(nav=>(
-            nav.linkto===location?
-                nav.board.url!==null?
-                    <React.Fragment key={nav.id}>
-                        <Parallax
-                            blur={10}
-                            bgImage={nav.board.url}
-                            strength={200}
-                        >
-                            Blur transition from min to max
-                            <div style={{ height: '400px' }} />
-                        </Parallax>
-                    </React.Fragment> :<div key={nav.id}></div>
-                :<div key={nav.id}></div>
-        ))
+    let title = ''
+    let board = null
+    topNav.map(nav => {
+        if (nav.linkto === location) {
+            if(nav.board!==null){
+                board = nav.board
+                title = nav.name
+            }
+        }
+    })
+    return (
+        board!==null?
+        <Parallax
+            blur={{min: -15, max: 15}}
+            bgImage={board.url}
+            strength={-200}
+        >
+            <Container style={{height: '400px', position: 'relative'}} className={classes.title}>
+                {title}
+            </Container>
+        </Parallax>:null
     )
 }
