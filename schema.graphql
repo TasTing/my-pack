@@ -5,7 +5,7 @@ schema {
     mutation: Mutation
 }
 
-union Morph = Card | CardAggregator | CardConnection | CardConnectionContent | CardConnectionCreated_at | CardConnectionCreated_by | CardConnectionDescription | CardConnectionId | CardConnectionImage | CardConnectionTitle | CardConnectionUpdated_at | CardConnectionUpdated_by | CardGroupBy | Category | CategoryAggregator | CategoryConnection | CategoryConnectionCreated_at | CategoryConnectionCreated_by | CategoryConnectionId | CategoryConnectionName | CategoryConnectionUpdated_at | CategoryConnectionUpdated_by | CategoryGroupBy | ComponentCardImageCard | ComponentFeatureCardFeature | ComponentMenuNavMenu | Gallery | Header | Landing | Post | PostAggregator | PostConnection | PostConnectionContent | PostConnectionCreated_at | PostConnectionCreated_by | PostConnectionDescription | PostConnectionFeatured | PostConnectionId | PostConnectionTitle | PostConnectionUpdated_at | PostConnectionUpdated_by | PostConnectionUser | PostGroupBy | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_at | UploadFileConnectionCreated_by | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_at | UploadFileConnectionUpdated_by | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionCreated_by | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionUpdated_by | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionCreated_by | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUpdated_by | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | createCardPayload | createCategoryPayload | createPostPayload | createRolePayload | createUserPayload | deleteCardPayload | deleteCategoryPayload | deleteGalleryPayload | deleteHeaderPayload | deleteLandingPayload | deletePostPayload | deleteRolePayload | deleteUserPayload | updateCardPayload | updateCategoryPayload | updateGalleryPayload | updateHeaderPayload | updateLandingPayload | updatePostPayload | updateRolePayload | updateUserPayload
+union Morph = Card | CardAggregator | CardConnection | CardConnectionContent | CardConnectionCreated_at | CardConnectionCreated_by | CardConnectionDescription | CardConnectionId | CardConnectionImage | CardConnectionTitle | CardConnectionUpdated_at | CardConnectionUpdated_by | CardGroupBy | Category | CategoryAggregator | CategoryConnection | CategoryConnectionCreated_at | CategoryConnectionCreated_by | CategoryConnectionId | CategoryConnectionName | CategoryConnectionUpdated_at | CategoryConnectionUpdated_by | CategoryGroupBy | ComponentCardImageCard | ComponentFeatureCardFeature | ComponentMenuNavMenu | ComponentParallaxLandingPageParallax | Gallery | Header | Landing | Post | PostAggregator | PostConnection | PostConnectionContent | PostConnectionCreated_at | PostConnectionCreated_by | PostConnectionDescription | PostConnectionFeatured | PostConnectionId | PostConnectionTitle | PostConnectionUpdated_at | PostConnectionUpdated_by | PostConnectionUser | PostGroupBy | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_at | UploadFileConnectionCreated_by | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_at | UploadFileConnectionUpdated_by | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionCreated_by | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionUpdated_by | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionCreated_by | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUpdated_by | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | createCardPayload | createCategoryPayload | createPostPayload | createRolePayload | createUserPayload | deleteCardPayload | deleteCategoryPayload | deleteGalleryPayload | deleteHeaderPayload | deleteLandingPayload | deletePostPayload | deleteRolePayload | deleteUserPayload | updateCardPayload | updateCategoryPayload | updateGalleryPayload | updateHeaderPayload | updateLandingPayload | updatePostPayload | updateRolePayload | updateUserPayload
 
 type AdminUser {
     id: ID!
@@ -177,6 +177,13 @@ type ComponentMenuNavMenu {
     name: String
 }
 
+type ComponentParallaxLandingPageParallax {
+    id: ID!
+    image: UploadFile
+    link: String
+    title: String
+}
+
 type Gallery {
     created_at: DateTime!
     created_by: AdminUser
@@ -202,6 +209,7 @@ type Landing {
     created_by: AdminUser
     headerCard: ComponentFeatureCardFeature
     id: ID!
+    landingPageParallax: [ComponentParallaxLandingPageParallax]
     primaryCarousel(limit: Int, sort: String, start: Int, where: JSON): [UploadFile]
     updated_at: DateTime!
     updated_by: AdminUser
@@ -856,6 +864,12 @@ input ComponentMenuNavMenuInput {
     name: String
 }
 
+input ComponentParallaxLandingPageParallaxInput {
+    image: ID
+    link: String
+    title: String
+}
+
 input FileInput {
     alternativeText: String
     caption: String
@@ -897,6 +911,7 @@ input LandingInput {
     content: String
     created_by: ID
     headerCard: ComponentFeatureCardFeatureInput
+    landingPageParallax: [ComponentParallaxLandingPageParallaxInput]
     primaryCarousel: [ID]
     updated_by: ID
 }
@@ -1029,6 +1044,13 @@ input editComponentMenuNavMenuInput {
     name: String
 }
 
+input editComponentParallaxLandingPageParallaxInput {
+    id: ID
+    image: ID
+    link: String
+    title: String
+}
+
 input editFileInput {
     alternativeText: String
     caption: String
@@ -1066,6 +1088,7 @@ input editLandingInput {
     content: String
     created_by: ID
     headerCard: editComponentFeatureCardFeatureInput
+    landingPageParallax: [editComponentParallaxLandingPageParallaxInput]
     primaryCarousel: [ID]
     updated_by: ID
 }

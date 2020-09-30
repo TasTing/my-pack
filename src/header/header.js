@@ -1,12 +1,10 @@
 import React from 'react';
 import ButtonAppBar from "./topNavigation/appBar";
 import {useLocation} from 'react-router-dom';
-import {CircularProgress, Grid} from "@material-ui/core";
-import Hidden from "@material-ui/core/Hidden";
+import {CircularProgress} from "@material-ui/core";
 import {useQuery} from "@apollo/client";
 import {loader} from "graphql.macro";
 
-import Banner from "./banner/banner";
 
 const getHeader = loader('../query/getHeader.graphql');
 

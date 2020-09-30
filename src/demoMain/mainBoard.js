@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import {Image, Transformation} from "cloudinary-react";
 import SideBar from "./sideBar/sideBar";
 import FeatureCard from "./featureCard";
+import ParallaxComponent from "./parallax/parallax";
 
 
 const getLanding = loader('../query/getLanding.graphql');
@@ -31,11 +32,13 @@ export default function MainBoard() {
     const {loading, error, data} = useQuery(getLanding);
     if (loading) return <CircularProgress/>;
     if (error) return <p>Error :(</p>;
+    let landing = data.landing
+
     return (
         <Grid container>
             <Grid item xs={12} md={8}>
                 <ReactMarkdown
-                    source={data.landing.content}
+                    source={landing.content}
                     renderers={renderers}
                 />
             </Grid>
@@ -43,6 +46,14 @@ export default function MainBoard() {
                 <SideBar/>
             </Grid>
             <Grid item={true} xs={12}>
+
+            </Grid>
+            <Grid item={true} xs={12}>
+                {landing.landingPageParallax!=null?
+                    landing.landingPageParallax.map(parallax=>(
+                        <ParallaxComponent title={parallax.title} image={parallax.image.url} link={parallax.link}/>
+                    )):null
+                }
                 <SideCardWrapper/>
             </Grid>
         </Grid>

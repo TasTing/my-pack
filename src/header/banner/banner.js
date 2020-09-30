@@ -1,5 +1,5 @@
 import React from "react";
-import {Parallax, Background} from 'react-parallax';
+import {Parallax} from 'react-parallax';
 import {makeStyles} from "@material-ui/core/styles";
 import {Container} from "@material-ui/core";
 
@@ -10,6 +10,14 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: 100,
         textAlign: 'center',
         color:'white',
+    },
+    inside: {
+        background:'transparent',
+        padding:20,
+        position:'absolute',
+        top:'50%',
+        left:"50%",
+        transform:'translate(-50%,-50%)',
     }
 }));
 
@@ -26,16 +34,16 @@ export default function Banner(props) {
                 title = nav.name
             }
         }
+        return null
     })
     return (
         board!==null?
         <Parallax
-            blur={{min: -15, max: 15}}
+            blur={{min: -1, max: 3}}
             bgImage={board.url}
-            strength={-200}
         >
-            <Container style={{height: '400px', position: 'relative'}} className={classes.title}>
-                {title}
+            <Container style={{height: '300px', position: 'relative'}} className={classes.title}>
+                <div className={classes.inside}>{title}</div>
             </Container>
         </Parallax>:null
     )

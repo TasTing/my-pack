@@ -62,6 +62,10 @@ export default function GithubProfile() {
         }
     }, [user, profile])
 
+    const handleClick = (e) => {
+        setUser(e)
+    }
+
     if (profile) {
         return (
             <Box shadow={3}>

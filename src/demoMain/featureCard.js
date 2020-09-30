@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {loader} from 'graphql.macro';
 import {useQuery} from "@apollo/client";
-import {CircularProgress, Divider} from "@material-ui/core";
+import {CircularProgress} from "@material-ui/core";
 
 const getPosts = loader('../query/getPosts.graphql');
 

@@ -5,5 +5,12 @@ query getLanding{
             url
         }
         content
+        landingPageParallax{
+            image{
+                url
+            }
+            title
+            link
+        }
     }
 }
