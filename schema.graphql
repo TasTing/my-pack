@@ -5,7 +5,7 @@ schema {
     mutation: Mutation
 }
 
-union Morph = Card | CardAggregator | CardConnection | CardConnectionContent | CardConnectionCreated_at | CardConnectionCreated_by | CardConnectionDescription | CardConnectionId | CardConnectionImage | CardConnectionTitle | CardConnectionUpdated_at | CardConnectionUpdated_by | CardGroupBy | Category | CategoryAggregator | CategoryConnection | CategoryConnectionCreated_at | CategoryConnectionCreated_by | CategoryConnectionId | CategoryConnectionName | CategoryConnectionUpdated_at | CategoryConnectionUpdated_by | CategoryGroupBy | ComponentCardImageCard | ComponentFeatureCardFeature | ComponentMenuNavMenu | ComponentParallaxLandingPageParallax | Gallery | Header | Landing | Post | PostAggregator | PostConnection | PostConnectionContent | PostConnectionCreated_at | PostConnectionCreated_by | PostConnectionDescription | PostConnectionFeatured | PostConnectionId | PostConnectionTitle | PostConnectionUpdated_at | PostConnectionUpdated_by | PostConnectionUser | PostGroupBy | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_at | UploadFileConnectionCreated_by | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_at | UploadFileConnectionUpdated_by | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionCreated_by | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionUpdated_by | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionCreated_by | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUpdated_by | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | createCardPayload | createCategoryPayload | createPostPayload | createRolePayload | createUserPayload | deleteCardPayload | deleteCategoryPayload | deleteGalleryPayload | deleteHeaderPayload | deleteLandingPayload | deletePostPayload | deleteRolePayload | deleteUserPayload | updateCardPayload | updateCategoryPayload | updateGalleryPayload | updateHeaderPayload | updateLandingPayload | updatePostPayload | updateRolePayload | updateUserPayload
+union Morph = Card | CardAggregator | CardConnection | CardConnectionContent | CardConnectionCreated_at | CardConnectionCreated_by | CardConnectionDescription | CardConnectionId | CardConnectionImage | CardConnectionTitle | CardConnectionUpdated_at | CardConnectionUpdated_by | CardGroupBy | Category | CategoryAggregator | CategoryConnection | CategoryConnectionCreated_at | CategoryConnectionCreated_by | CategoryConnectionId | CategoryConnectionName | CategoryConnectionUpdated_at | CategoryConnectionUpdated_by | CategoryGroupBy | ComponentCardImageCard | ComponentFeatureCardFeature | ComponentMenuNavMenu | ComponentParallaxLandingPageParallax | Gallery | Header | Landing | Post | PostAggregator | PostConnection | PostConnectionContent | PostConnectionCreated_at | PostConnectionCreated_by | PostConnectionDescription | PostConnectionId | PostConnectionImage | PostConnectionTitle | PostConnectionUpdated_at | PostConnectionUpdated_by | PostConnectionUser | PostGroupBy | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_at | UploadFileConnectionCreated_by | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_at | UploadFileConnectionUpdated_by | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionCreated_by | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionUpdated_by | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionCreated_by | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUpdated_by | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | createCardPayload | createCategoryPayload | createPostPayload | createRolePayload | createUserPayload | deleteCardPayload | deleteCategoryPayload | deleteGalleryPayload | deleteHeaderPayload | deleteLandingPayload | deletePostPayload | deleteRolePayload | deleteUserPayload | updateCardPayload | updateCategoryPayload | updateGalleryPayload | updateHeaderPayload | updateLandingPayload | updatePostPayload | updateRolePayload | updateUserPayload
 
 type AdminUser {
     id: ID!
@@ -258,8 +258,8 @@ type Post {
     created_at: DateTime!
     created_by: AdminUser
     description: String
-    featured: UploadFile
     id: ID!
+    image: UploadFile
     title: String
     updated_at: DateTime!
     updated_by: AdminUser
@@ -297,12 +297,12 @@ type PostConnectionDescription {
     key: String
 }
 
-type PostConnectionFeatured {
+type PostConnectionId {
     connection: PostConnection
     key: ID
 }
 
-type PostConnectionId {
+type PostConnectionImage {
     connection: PostConnection
     key: ID
 }
@@ -332,8 +332,8 @@ type PostGroupBy {
     created_at: [PostConnectionCreated_at]
     created_by: [PostConnectionCreated_by]
     description: [PostConnectionDescription]
-    featured: [PostConnectionFeatured]
     id: [PostConnectionId]
+    image: [PostConnectionImage]
     title: [PostConnectionTitle]
     updated_at: [PostConnectionUpdated_at]
     updated_by: [PostConnectionUpdated_by]
@@ -921,7 +921,7 @@ input PostInput {
     content: String
     created_by: ID
     description: String
-    featured: ID
+    image: ID
     title: String
     updated_by: ID
     user: ID
@@ -1098,7 +1098,7 @@ input editPostInput {
     content: String
     created_by: ID
     description: String
-    featured: ID
+    image: ID
     title: String
     updated_by: ID
     user: ID

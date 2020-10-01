@@ -77,7 +77,7 @@ const MediaCard = (props) => {
                             {post.title}
                         </Typography>
                         <Typography variant="body2" className={classes.desc}>
-                            {sliceWord(post.description)}
+                            {SliceWord(post)}
                         </Typography>
                     </CardContent>
                     <CardActions className={classes.buttonGroup}>
@@ -95,8 +95,9 @@ const MediaCard = (props) => {
     )
 }
 
-const sliceWord = (content) => {
+export function SliceWord (props)  {
     let templateWord = '';
+    let content = props.description
     const len = 200;
     if (content.length * 2 <= len) {
         return content;

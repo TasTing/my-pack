@@ -24,7 +24,10 @@ export default function Posts() {
     if (error) return <p>Error :(</p>;
 
     return (
-        <MainFeaturedPost posts={data.posts}/>
+        <React.Fragment>
+            <MainFeaturedPost posts={data.posts}/>
+        </React.Fragment>
+
     )
 }
 

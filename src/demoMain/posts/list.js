@@ -52,35 +52,36 @@ export default function PostList(props) {
             <Box boxShadow={3} key={post.id}>
                 {
                     post.categories.some(category => ((category.name === 'feature' && state.feature === true) || (category.name === 'news' && state.news === true) || (category.name === 'article' && state.article === true))) ?
-                        <HiddenPost post={post}/> : null
+                        <FeatureCard card={post}/> : null
                 }
             </Box>
         )))
 }
 
-const HiddenPost = (props) => {
-    let post = props.post
+const FeatureCard = (props) => {
+    let card = props.card
     const classes = useStyles();
     let match = useRouteMatch();
     return (
+        card.image!=null?
         <Paper className={classes.mainFeaturedPost}
-               key={post.id}
-               style={{backgroundImage: `url(${post.featured.url})`}}>
+               key={card.id}
+               style={{backgroundImage: `url(${card.image.url})`}}>
             {/* Increase the priority of the hero background image */}
-            {<img style={{display: 'none'}} id={post.featured.id} src={post.featured.url}
-                  alt={post.featured.alt}/>}
+            {<img style={{display: 'none'}} id={card.image.id} src={card.image.url}
+                  alt={card.image.alt}/>}
             <div className={classes.overlay}/>
             <Grid container>
                 <Grid item md={12}>
                     <div className={classes.mainFeaturedPostContent}>
                         <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                            {post.title}
+                            {card.title}
                         </Typography>
                         <Typography variant="h5" color="inherit" paragraph>
-                            {post.description}
+                            {card.description}
                         </Typography>
                         <Typography variant="caption" color="inherit" paragraph>
-                            Author: {post.user == null ? '匿名' : post.user.username}
+                            Author: {card.user == null ? '匿名' : card.user.username}
                         </Typography>
                         <Typography variant="caption" color="inherit" paragraph>
                             {Intl.DateTimeFormat('en', {
@@ -88,22 +89,22 @@ const HiddenPost = (props) => {
                                 year: 'numeric',
                                 month: 'short',
                                 day: 'numeric'
-                            }).format(post.create_at)}
+                            }).format(card.create_at)}
                         </Typography>
                         <Typography>
-                            {post.categories.map(category => (<span key={category.name}>|{category.name}|</span>))}
+                            {card.categories.map(category => (<span key={category.name}>|{category.name}|</span>))}
                         </Typography>
                         <Typography variant='button'>
                             <Button size='large' variant={"contained"} color={"default"}
-                                    href={`${match.url}/${post.title}/${post.id}`}
-                                    id={post.id}
-                                    onClick={handleclick(`${match.url}/${post.title}/${post.id}`)}>
+                                    href={`${match.url}/${card.title}/${card.id}`}
+                                    id={card.id}
+                                    onClick={handleclick(`${match.url}/${card.title}/${card.id}`)}>
                                 Read more...
                             </Button>
                         </Typography>
                     </div>
                 </Grid>
             </Grid>
-        </Paper>
+        </Paper>:null
     )
 }

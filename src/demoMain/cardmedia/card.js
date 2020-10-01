@@ -19,8 +19,8 @@ import {
 } from '@material-ui/core';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import {red} from '@material-ui/core/colors';
-
 import Box from "@material-ui/core/Box";
+import {SliceWord} from '../featureCard'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -119,7 +119,7 @@ export default function ReviewCard(props) {
                     />
                     <CardContent>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {sliceWord(card.description)}
+                            {SliceWord(card)}
                         </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
@@ -148,26 +148,4 @@ export default function ReviewCard(props) {
     );
 }
 
-const sliceWord = (content) => {
-    let templateWord = '';
-    const len = 100;
-    if (content.length * 2 <= len) {
-        return content;
-    }
-    let strLength = 0;
-    for (let i = 0; i < content.length; i++) {
-        templateWord = templateWord + content.charAt(i)
-        if (content.charCodeAt(i) > (len / 4)) {
-            strLength = strLength + 2;
-            if (strLength >= len) {
-                return templateWord.substring(0, templateWord.length - 1) + '...'
-            }
-        } else {
-            strLength = strLength + 1
-            if (strLength >= len) {
-                return templateWord.substring(0, templateWord.length - 2) + '...'
-            }
-        }
-    }
-    return templateWord;
-}
+

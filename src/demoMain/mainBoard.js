@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import {Image, Transformation} from "cloudinary-react";
 import SideBar from "./sideBar/sideBar";
 import FeatureCard from "./featureCard";
+import FeatureBlock from "./feature/feature";
 import ParallaxComponent from "./parallax/parallax";
 
 
@@ -46,7 +47,7 @@ export default function MainBoard() {
                 <SideBar/>
             </Grid>
             <Grid item={true} xs={12}>
-
+                <FeatureBlock/>
             </Grid>
             <Grid item={true} xs={12}>
                 {landing.landingPageParallax!=null?

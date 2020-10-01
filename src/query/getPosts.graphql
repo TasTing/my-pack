@@ -2,7 +2,7 @@ query getPosts{
     posts{
         id
         title
-        featured {
+        image {
             id
             url
             caption
