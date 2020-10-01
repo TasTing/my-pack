@@ -71,7 +71,7 @@ function Main(props) {
             </Hidden>
             <Box boxShadow={3}>
                 <Paper>
-                    <Image publicId={post.featured.url}
+                    <Image publicId={post.image.url}
                            dpr="auto"
                            width="100%"
                            crop="scale"

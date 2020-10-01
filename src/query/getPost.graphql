@@ -8,7 +8,7 @@ query getPost($postId:ID!){
         user {
             username
         }
-        featured{
+        image{
             url
             provider_metadata
         }
