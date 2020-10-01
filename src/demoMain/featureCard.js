@@ -66,7 +66,7 @@ const MediaCard = (props) => {
                     <CardActionArea href={`/posts/${post.title}/${post.id}`}>
                         <CardMedia
                             className={classes.media}
-                            image={post.featured.url}
+                            image={post.image.url}
                             title="Contemplative Reptile"
                         />
                     </CardActionArea>
