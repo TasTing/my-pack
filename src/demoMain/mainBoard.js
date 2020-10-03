@@ -52,7 +52,7 @@ export default function MainBoard() {
             <Grid item={true} xs={12}>
                 {landing.landingPageParallax!=null?
                     landing.landingPageParallax.map(parallax=>(
-                        <ParallaxComponent title={parallax.title} image={parallax.image.url} link={parallax.link}/>
+                        <ParallaxComponent key={parallax.id} title={parallax.title} image={parallax.image.url} link={parallax.link}/>
                     )):null
                 }
                 <SideCardWrapper/>

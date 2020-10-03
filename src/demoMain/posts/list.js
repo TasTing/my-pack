@@ -38,10 +38,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function handleclick(props) {
-
-}
-
 export default function PostList(props) {
 
     let posts = props.posts
@@ -98,7 +94,7 @@ const FeatureCard = (props) => {
                             <Button size='large' variant={"contained"} color={"default"}
                                     href={`${match.url}/${card.title}/${card.id}`}
                                     id={card.id}
-                                    onClick={handleclick(`${match.url}/${card.title}/${card.id}`)}>
+                                    >
                                 Read more...
                             </Button>
                         </Typography>

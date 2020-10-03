@@ -21,18 +21,18 @@ const GreenCheckbox = withStyles({
 })((props) => <Checkbox color="default" {...props} />);
 
 export default function CheckboxLabels(props) {
+
     const [state, setState] = useState({
-        article: true,
-        feature: true,
-        news: true,
-        checkedD: true,
-        checkedE: true,
-        posts: props.posts
+        posts: props.posts,
     });
 
-    useEffect(() => {
+    useEffect(()=>{
+        props.categories.map(category=>{
+            setState({...state,[category.name]:true})
+        })
+        console.log(state.article)
+    },[props.categories])
 
-    }, [state])
 
 
     const handleChange = (event) => {
@@ -45,17 +45,17 @@ export default function CheckboxLabels(props) {
                 <FormGroup row>
                     <FormControlLabel
                         control={<GreenCheckbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}
-                                                checked={state.article} onChange={handleChange} name="article"/>}
+                                                defaultChecked  onChange={handleChange} name="article"/>}
                         label="Article"
                     />
                     <FormControlLabel
                         control={<GreenCheckbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}
-                                                checked={state.feature} onChange={handleChange} name="feature"/>}
+                                                defaultChecked  onChange={handleChange} name="feature"/>}
                         label="Feature"
                     />
                     <FormControlLabel
                         control={<GreenCheckbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}
-                                                checked={state.news} onChange={handleChange} name="news"/>}
+                                                defaultChecked  onChange={handleChange} name="news"/>}
                         label="News"
                     />
                 </FormGroup>
