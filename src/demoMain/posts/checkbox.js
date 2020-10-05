@@ -8,7 +8,12 @@ import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import Grid from "@material-ui/core/Grid";
 import PostList from "./list";
-import {Container} from "@material-ui/core";
+import {CircularProgress, Container} from "@material-ui/core";
+import {loader} from 'graphql.macro';
+import {useQuery} from "@apollo/client";
+
+
+const getPosts = loader('../../query/getPosts.graphql');
 
 const GreenCheckbox = withStyles({
     root: {
@@ -21,19 +26,15 @@ const GreenCheckbox = withStyles({
 })((props) => <Checkbox color="default" {...props} />);
 
 export default function CheckboxLabels(props) {
-
-    const [state, setState] = useState({
-        posts: props.posts,
-    });
+    const [state, setState] = useState({})
 
     useEffect(()=>{
-        props.categories.map(category=>{
-            setState({...state,[category.name]:true})
-        })
-        console.log(state.article)
-    },[props.categories])
 
+    },)
 
+    const {loading:postLoading, error:postError, data:postData} = useQuery(getPosts);
+    if (postLoading) return <CircularProgress/>;
+    if (postError) return <p>Error :(</p>;
 
     const handleChange = (event) => {
         setState({...state, [event.target.name]: event.target.checked});
@@ -59,7 +60,7 @@ export default function CheckboxLabels(props) {
                         label="News"
                     />
                 </FormGroup>
-                <PostList posts={state.posts} state={state}/>
+                <PostList posts={postData.posts} state={state}/>
             </Container>
         </Grid>
     );

@@ -11,18 +11,14 @@ import Post from "./post";
 import SimpleBreadCrumb from "../../breadcrumbs/breadcrumb";
 import CheckboxLabels from "./checkbox";
 import {loader} from 'graphql.macro';
-
-
-const getPosts = loader('../../query/getPosts.graphql');
 const getCategories = loader('../../query/getCategories.graphql');
 
 export default function Posts() {
     // APOLLO query function
-    const {loading:postLoading, error:postError, data:postData} = useQuery(getPosts);
+
     const {loading:cateLoading, error:cateError, data:cateData} = useQuery(getCategories);
     // requires modification
-    if (postLoading) return <CircularProgress/>;
-    if (postError) return <p>Error :(</p>;
+
 
     // requires modification
     if (cateLoading) return <CircularProgress/>;
@@ -31,7 +27,7 @@ export default function Posts() {
 
     return (
         <React.Fragment>
-            <MainFeaturedPost posts={postData.posts} categories={cateData.categories}/>
+            <MainFeaturedPost  categories={cateData.categories}/>
         </React.Fragment>
 
     )
@@ -39,7 +35,6 @@ export default function Posts() {
 
 function MainFeaturedPost(props) {
     let match = useRouteMatch();
-    let posts = props.posts
     let categories = props.categories
     const links = [
         {
@@ -57,7 +52,7 @@ function MainFeaturedPost(props) {
                 <Hidden mdDown>
                     <SimpleBreadCrumb links={links}/>
                 </Hidden>
-                <CheckboxLabels posts={posts} categories={categories}/>
+                <CheckboxLabels categories={categories}/>
             </Route>
             <Route path={`${match.path}/:postTitle/:postId`}>
                 <Post/>
