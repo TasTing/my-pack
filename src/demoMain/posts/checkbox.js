@@ -26,41 +26,51 @@ const GreenCheckbox = withStyles({
 })((props) => <Checkbox color="default" {...props} />);
 
 export default function CheckboxLabels(props) {
-    const [state, setState] = useState({})
+    const [state, setState] = useState({
+
+    })
 
     useEffect(()=>{
+        console.log(state)
 
     },)
 
-    const {loading:postLoading, error:postError, data:postData} = useQuery(getPosts);
-    if (postLoading) return <CircularProgress/>;
-    if (postError) return <p>Error :(</p>;
+    let categories = props.categories
+    const {loading, error, data} = useQuery(getPosts);
+    if (loading) return <CircularProgress/>;
+    if (error) return <p>Error :(</p>;
+    let posts = data.posts
 
     const handleChange = (event) => {
         setState({...state, [event.target.name]: event.target.checked});
+        if(event.target.checked===false){
+            // hide posts with specific cate
+        }
+        if(event.target.checked===true){
+            // show posts with specific cate
+        }
     };
 
     return (
         <Grid>
             <Container>
                 <FormGroup row>
-                    <FormControlLabel
-                        control={<GreenCheckbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}
-                                                defaultChecked  onChange={handleChange} name="article"/>}
-                        label="Article"
-                    />
-                    <FormControlLabel
-                        control={<GreenCheckbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}
-                                                defaultChecked  onChange={handleChange} name="feature"/>}
-                        label="Feature"
-                    />
-                    <FormControlLabel
-                        control={<GreenCheckbox icon={<FavoriteBorder/>} checkedIcon={<Favorite/>}
-                                                defaultChecked  onChange={handleChange} name="news"/>}
-                        label="News"
-                    />
+                    {categories.map(category =>(
+                        <FormControlLabel
+                            key={category.name}
+                            control={
+                                <GreenCheckbox
+                                    icon={<FavoriteBorder/>}
+                                    checkedIcon={<Favorite/>}
+                                    defaultChecked
+                                    onChange={handleChange}
+                                    name={category.name}
+                                />}
+                            label={category.name.toUpperCase()}
+                        />
+                    ))}
                 </FormGroup>
-                <PostList posts={postData.posts} state={state}/>
+                <PostList posts={posts}/>
             </Container>
         </Grid>
     );

@@ -33,23 +33,18 @@ const useStyles = makeStyles((theme) => ({
             padding: theme.spacing(6),
             // paddingRight: 0,
         },
-        justifyContent:'left',
-        textAlign:'justify',
+        justifyContent: 'left',
+        textAlign: 'justify',
     },
 }));
 
 export default function PostList(props) {
 
     let posts = props.posts
-    let state = props.state
-
     return (
         posts.map(post => (
             <Box boxShadow={3} key={post.id}>
-                {
-                    post.categories.some(category => ((category.name === 'feature' && state.feature === true) || (category.name === 'news' && state.news === true) || (category.name === 'article' && state.article === true))) ?
-                        <FeatureCard card={post}/> : null
-                }
+                <FeatureCard card={post}/>
             </Box>
         )))
 }
@@ -59,7 +54,6 @@ const FeatureCard = (props) => {
     const classes = useStyles();
     let match = useRouteMatch();
     return (
-        card.image!=null?
         <Paper className={classes.mainFeaturedPost}
                key={card.id}
                style={{backgroundImage: `url(${card.image.url})`}}>
@@ -94,13 +88,13 @@ const FeatureCard = (props) => {
                             <Button size='large' variant={"contained"} color={"default"}
                                     href={`${match.url}/${card.title}/${card.id}`}
                                     id={card.id}
-                                    >
+                            >
                                 Read more...
                             </Button>
                         </Typography>
                     </div>
                 </Grid>
             </Grid>
-        </Paper>:null
+        </Paper>
     )
 }

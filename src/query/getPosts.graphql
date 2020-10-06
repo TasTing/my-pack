@@ -1,5 +1,5 @@
 query getPosts{
-    posts{
+    posts(sort:"created_at:desc"){
         id
         title
         image {

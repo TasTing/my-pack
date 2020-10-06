@@ -1,0 +1,23 @@
+query ($Category:ID!){
+    category(id:$Category){
+        name
+        posts{
+            id
+            title
+            image {
+                id
+                url
+                caption
+
+            }
+            created_at
+            categories{
+                name
+            }
+            user {
+                username
+            }
+            description
+        }
+    }
+}

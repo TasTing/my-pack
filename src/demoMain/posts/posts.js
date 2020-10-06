@@ -16,18 +16,14 @@ const getCategories = loader('../../query/getCategories.graphql');
 export default function Posts() {
     // APOLLO query function
 
-    const {loading:cateLoading, error:cateError, data:cateData} = useQuery(getCategories);
-    // requires modification
-
-
-    // requires modification
-    if (cateLoading) return <CircularProgress/>;
-    if (cateError) return <p>Error :(</p>;
+    const {loading, error, data} = useQuery(getCategories);
+    if (loading) return <CircularProgress/>;
+    if (error) return <p>Error :(</p>;
 
 
     return (
         <React.Fragment>
-            <MainFeaturedPost  categories={cateData.categories}/>
+            <MainFeaturedPost  categories={data.categories}/>
         </React.Fragment>
 
     )
